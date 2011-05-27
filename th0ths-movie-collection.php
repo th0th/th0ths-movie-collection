@@ -29,7 +29,7 @@ License: GPL3
 function th0ths_movie_collection_admin_menus()
 {
 	/* menu item */
-	add_menu_page("th0th's Movie Collection", "th0th's Movie Collection", "manage_options", "th0ths_movie_collection", "th0ths_movie_collection_manage_movies");
+	add_menu_page("th0th's Movie Collection", "th0th's Movie Collection", "manage_options", "th0ths_movie_collection", "th0ths_movie_collection_manage_movies", WP_PLUGIN_URL . "/th0ths-movie-collection/images/admin/menu-icon.png");
 	
 	/* submenu - main */
 	add_submenu_page("th0ths_movie_collection", "Manage Movies", "Manage Movies", "manage_options", "th0ths_movie_collection", "th0ths_movie_collection_manage_movies");
