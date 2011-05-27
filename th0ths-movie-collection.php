@@ -40,12 +40,20 @@ function th0ths_movie_collection_admin_menus()
 
 function th0ths_movie_collection_general_settings()
 {
-	echo "Settings page.";
+	?>
+	<div class="wrap">
+		<h2>Settings</h2>
+	</div>
+	<?php
 }
 
 function th0ths_movie_collection_manage_movies()
 {
-	echo "Manage movies.";
+	?>
+	<div class="wrap">
+		<h2>Manage Movies</h2>
+	</div>
+	<?php
 }
 
 function th0ths_movie_collection_sc_newest($atts)
