@@ -48,7 +48,28 @@ function th0ths_movie_collection_manage_movies()
 	echo "Manage movies.";
 }
 
+function th0ths_movie_collection_sc_newest($atts)
+{
+	echo "Newest movies.";
+}
+
+function th0ths_movie_collection_sc_best($atts)
+{
+	if ( isset($atts['n'] ))
+	{
+		echo "Best " . $atts['n'] . " movies.";
+	}
+	else
+	{
+		echo "Best movies.";
+	}
+}
+
 /* register menus */
 add_action('admin_menu', 'th0ths_movie_collection_admin_menus');
+
+/* register shortcodes */
+add_shortcode( 'th0ths-movie-collection-newests', 'th0ths_movie_collection_sc_newest' );
+add_shortcode( 'th0ths-movie-collection-bests', 'th0ths_movie_collection_sc_best' );
 
 ?>
