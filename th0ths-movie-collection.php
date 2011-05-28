@@ -104,6 +104,9 @@ function th0ths_movie_collection_admin_menus()
     add_submenu_page("th0ths_movie_collection", "Manage Movies", "Manage Movies", "manage_options", "th0ths_movie_collection", "th0ths_movie_collection_manage_movies");
     
     /* submenu - options */
+    add_submenu_page("th0ths_movie_collection", "Add Movie", "Add Movie", "manage_options", "th0ths_movie_collection_add", "th0ths_movie_collection_add_movie");
+    
+    /* submenu - options */
     add_submenu_page("th0ths_movie_collection", "Settings", "Settings", "manage_options", "th0ths_movie_collection_options", "th0ths_movie_collection_general_settings");
 }
 
@@ -116,18 +119,53 @@ function th0ths_movie_collection_general_settings()
     <?php
 }
 
+function th0ths_movie_collection_add_movie()
+{
+    ?>
+    <div class="wrap">
+        <h2>Add Movie</h2>
+    </div>
+    <?php
+}
+
 function th0ths_movie_collection_manage_movies()
 {
 	global $wpdb, $th0ths_movie_collection_db_table;
 	
 	$movies = $wpdb->get_results("SELECT * FROM " . $th0ths_movie_collection_db_table, ARRAY_A);
 	
-	print_r($movies);
-	
     ?>
     <div class="wrap">
-        <h2>Manage Movies</h2>
-    </div>
+		<h2>Manage Movies</h2>
+		<div>
+			<form method="post" name="">
+				<table class="widefat">
+					<thead>
+						<tr>
+							<th><input type="checkbox" onClick="checkAll('quoteCB',this)" /></th>
+							<th>Cover</th>
+							<th>Name</th>
+							<th>Genre</th>
+							<th>Year</th>
+							<th>Rating</th>
+							<th>Length</th>
+						</tr>
+						<?php foreach ($movies as $movie) { ?>
+						<tr>
+							<td><input type="checkbox" class="quoteCB" name="quoteIDs[]" value="<?php echo $movie['id']; ?>" /></td>
+							<td><img src="<?php echo $movie['cover']; ?>" /></td>
+							<td><?php echo $movie['name']; ?></td>
+							<td><?php echo $movie['genre']; ?></td>
+							<td><?php echo $movie['year']; ?></td>
+							<td><?php echo $movie['rating']; ?></td>
+							<td><?php echo $movie['length']; ?></td>
+						</tr>
+						<?php } ?>
+					</thead>
+				</table>
+				<input name="action" class="button" type="submit" value="What to do?" />
+			</form>
+		</div>
     <?php
 }
 
