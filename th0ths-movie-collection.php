@@ -30,7 +30,7 @@ global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_
 $th0ths_movie_collection_plugin_version = "0.1";
 $th0ths_movie_collection_post_type = "movies";
 
-$th0ths_movie_collection_movie_imdb_data = array(
+$th0ths_movie_collection_movie_data = array(
 	'imdb_id' => 'title_id',
 	'title' => 'title',
 	'year' => 'year',
@@ -116,7 +116,7 @@ function th0ths_movie_collection_post_type()
 
 function th0ths_movie_collection_fetch_data()
 {
-	global $post, $th0ths_movie_collection_movie_imdb_data;
+	global $post, $th0ths_movie_collection_movie_data;
 	
 	include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
 	
@@ -125,23 +125,24 @@ function th0ths_movie_collection_fetch_data()
 	$imdb = new Imdb();
 	$imdb_fetch = $imdb->getMovieInfo($movie['name']);
 	
-	foreach (array_keys($th0ths_movie_collection_movie_imdb_data) as $movie_meta)
+	foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
 	{
-		update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_imdb_data[$movie_meta]]);
-		update_option('test', $post->post_title);
-		update_option('test2', $imdb_fetch);
-		update_option('test3', $th0ths_movie_collection_movie_imdb_data[$movie_meta]);
-		update_option('test4', $imdb_fetch[$th0ths_movie_collection_movie_imdb_data[$movie_meta]]);
+		update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_data[$movie_meta]]);
 	}
 }
 
 function th0ths_movie_collection_content_filter($context)
 {
-	global $post;
+	global $post, $th0ths_movie_collection_movie_data;
 	
 	if (get_post_type($post) == 'movies')
 	{
-		echo "hey";
+		foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
+		{
+			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
+		}
+		
+		print_r($movie);
 	}
 	else
 	{
