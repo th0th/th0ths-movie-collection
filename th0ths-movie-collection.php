@@ -25,10 +25,29 @@ License: GPL3
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
+global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type, $th0ths_movie_collection_movie_data;
 
 $th0ths_movie_collection_plugin_version = "0.1";
 $th0ths_movie_collection_post_type = "movies";
+
+$th0ths_movie_collection_movie_imdb_data = array(
+	'imdb_id' => 'title_id',
+	'title' => 'title',
+	'year' => 'year',
+	'imdb_rating' => 'rating',
+	'genres' => 'genres',
+	'directors' => 'directors',
+	'writers' => 'writers',
+	'stars' => 'stars',
+	'cast' => 'cast',
+	'plot' => 'plot',
+	#'poster' => 'poster',
+	'runtime' => 'runtime',
+	'storyline' => 'storyline',
+	'imdb_url' => 'imdb_url'
+);
+	
+	
 
 /* activation function */
 function th0ths_movie_collection_activate()
@@ -85,7 +104,7 @@ function th0ths_movie_collection_post_type()
 		'menu_icon' => WP_PLUGIN_URL . "/th0ths-movie-collection/images/admin/menu-icon.png",
 		'capability_type' => 'post',
 		'hierarchical' => false,
-		'supports' => array('title', 'editor', 'thumbnail', 'custom-fields', 'comments'),
+		'supports' => array('title', 'editor', 'custom-fields', 'comments'),
 		'has_archive' => true,
 		'rewrite' => true,
 		'can_export' => true
@@ -93,6 +112,41 @@ function th0ths_movie_collection_post_type()
 		
 	
 	register_post_type($th0ths_movie_collection_post_type, $post_type_args);
+}
+
+function th0ths_movie_collection_fetch_data()
+{
+	global $post, $th0ths_movie_collection_movie_imdb_data;
+	
+	include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
+	
+	$movie['name'] = $post->post_title;
+	
+	$imdb = new Imdb();
+	$imdb_fetch = $imdb->getMovieInfo($movie['name']);
+	
+	foreach (array_keys($th0ths_movie_collection_movie_imdb_data) as $movie_meta)
+	{
+		update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_imdb_data[$movie_meta]]);
+		update_option('test', $post->post_title);
+		update_option('test2', $imdb_fetch);
+		update_option('test3', $th0ths_movie_collection_movie_imdb_data[$movie_meta]);
+		update_option('test4', $imdb_fetch[$th0ths_movie_collection_movie_imdb_data[$movie_meta]]);
+	}
+}
+
+function th0ths_movie_collection_content_filter($context)
+{
+	global $post;
+	
+	if (get_post_type($post) == 'movies')
+	{
+		echo "hey";
+	}
+	else
+	{
+		return $context;
+	}
 }
 
 function th0ths_movie_collection_sc_newest($atts)
@@ -117,6 +171,10 @@ register_activation_hook(__FILE__, 'th0ths_movie_collection_activate');
 
 /* register plugin post-type */
 add_action('init', 'th0ths_movie_collection_post_type');
+
+add_action('edit_post', 'th0ths_movie_collection_fetch_data');
+
+add_action('the_content', 'th0ths_movie_collection_content_filter');
 
 /* register shortcodes */
 add_shortcode('th0ths-movie-collection-newests', 'th0ths_movie_collection_sc_newest');
