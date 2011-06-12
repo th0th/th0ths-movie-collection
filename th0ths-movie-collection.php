@@ -134,17 +134,24 @@ function th0ths_movie_collection_fetch_data()
 function th0ths_movie_collection_content_filter($context)
 {
 	global $post, $th0ths_movie_collection_movie_data;
-
-	foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
-	{
-		$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
-	}
 	
-	foreach (array_keys($movie) as $meta_key)
+	if (get_post_type($post) == 'movies')
 	{
-		?>
-		<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
-		<?php
+		foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
+		{
+			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
+		}
+		
+		foreach (array_keys($movie) as $meta_key)
+		{
+			?>
+			<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
+			<?php
+		}
+	}
+	else
+	{
+		return $context;
 	}
 }
 
@@ -194,13 +201,7 @@ add_action('admin_menu', 'th0ths_movie_collection_admin_menus');
 
 add_action('edit_post', 'th0ths_movie_collection_fetch_data');
 
-if (isset($GLOBALS['post']))
-{
-	if (get_post_type($GLOBALS['post']) == 'movies')
-	{
-		add_action('the_content', 'th0ths_movie_collection_content_filter');
-	}
-}
+add_action('the_content', 'th0ths_movie_collection_content_filter');
 
 /* register shortcodes */
 add_shortcode('th0ths-movie-collection-newests', 'th0ths_movie_collection_sc_newest');
