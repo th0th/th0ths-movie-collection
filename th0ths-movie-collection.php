@@ -41,7 +41,7 @@ $th0ths_movie_collection_movie_data = array(
 	'stars' => 'stars',
 	'cast' => 'cast',
 	'plot' => 'plot',
-	#'poster' => 'poster',
+	'poster' => 'poster',
 	'runtime' => 'runtime',
 	'storyline' => 'storyline',
 	'imdb_url' => 'imdb_url'
@@ -141,7 +141,11 @@ function th0ths_movie_collection_content_filter($context)
 		{
 			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
 		}
+		?>
 		
+		<div class="th0ths_movie_collection_poster"><img src="<?php echo $movie['poster']; ?>" /></div>
+		
+		<?php
 		foreach (array_keys($movie) as $meta_key)
 		{
 			?>
@@ -178,9 +182,10 @@ function th0ths_movie_collection_options()
 	<div class="wrap">
 		<h2><?php _e("Options"); ?></h2>
 		<form method="post">
-		<p class="submit">
-			<input type="submit" class="button-primary" value="<?php _e("Save Changes") ?>" />
-		</p>
+			<span>Download movie posters while adding movie?</span>
+			<p class="submit">
+				<input type="submit" class="button-primary" value="<?php _e("Save Changes") ?>" />
+			</p>
 		</form>
 	</div>
 	<?php
