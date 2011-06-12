@@ -142,7 +142,12 @@ function th0ths_movie_collection_content_filter($context)
 			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
 		}
 		
-		print_r($movie);
+		foreach (array_keys($movie) as $meta_key)
+		{
+			?>
+			<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
+			<?php
+		}
 	}
 	else
 	{
