@@ -172,11 +172,27 @@ function th0ths_movie_collection_sc_best($atts)
     }
 }
 
+function th0ths_movie_collection_options()
+{
+	?>
+	<div class="wrap">
+		<h2><?php _e("Options"); ?></h2>
+	</div>
+	<?php
+}
+
+function th0ths_movie_collection_admin_menus()
+{
+	add_submenu_page('edit.php?post_type=movies', __("Options"), __("Options"), 'manage_options', 'th0ths_movie_collection_options', 'th0ths_movie_collection_options');
+}
+
 /* register plugin status functions */
 register_activation_hook(__FILE__, 'th0ths_movie_collection_activate');
 
 /* register plugin post-type */
 add_action('init', 'th0ths_movie_collection_post_type');
+
+add_action('admin_menu', 'th0ths_movie_collection_admin_menus');
 
 add_action('edit_post', 'th0ths_movie_collection_fetch_data');
 
