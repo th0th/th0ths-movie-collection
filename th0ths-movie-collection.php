@@ -177,6 +177,11 @@ function th0ths_movie_collection_options()
 	?>
 	<div class="wrap">
 		<h2><?php _e("Options"); ?></h2>
+		<form method="post">
+		<p class="submit">
+			<input type="submit" class="button-primary" value="<?php _e("Save Changes") ?>" />
+		</p>
+		</form>
 	</div>
 	<?php
 }
