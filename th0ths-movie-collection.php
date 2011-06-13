@@ -41,7 +41,7 @@ $th0ths_movie_collection_movie_data = array(
 	'stars' => 'stars',
 	'cast' => 'cast',
 	'plot' => 'plot',
-	'poster' => 'poster',
+	#'poster' => 'poster',
 	'runtime' => 'runtime',
 	'storyline' => 'storyline',
 	'imdb_url' => 'imdb_url'
@@ -129,6 +129,15 @@ function th0ths_movie_collection_fetch_data()
 	{
 		update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_data[$movie_meta]]);
 	}
+	
+	if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
+	{
+		$poster_info = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+		update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
+		update_post_meta($post->ID, 'poster_html', $poster_info);
+	}
+	
+	update_option("test", $poster_info);
 }
 
 function th0ths_movie_collection_content_filter($context)
@@ -143,7 +152,7 @@ function th0ths_movie_collection_content_filter($context)
 		}
 		?>
 		
-		<div class="th0ths_movie_collection_poster"><img src="<?php echo $movie['poster']; ?>" /></div>
+		<div class="th0ths_movie_collection_poster"><?php echo get_post_meta($post->ID, 'poster_html', true); ?></div>
 		
 		<?php
 		foreach (array_keys($movie) as $meta_key)
