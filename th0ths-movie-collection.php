@@ -25,29 +25,10 @@ License: GPL3
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type, $th0ths_movie_collection_movie_data;
+global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
 
 $th0ths_movie_collection_plugin_version = "0.1";
 $th0ths_movie_collection_post_type = "movies";
-
-$th0ths_movie_collection_movie_data = array(
-	'imdb_id' => 'title_id',
-	'title' => 'title',
-	'year' => 'year',
-	'imdb_rating' => 'rating',
-	'genres' => 'genres',
-	'directors' => 'directors',
-	'writers' => 'writers',
-	'stars' => 'stars',
-	'cast' => 'cast',
-	'plot' => 'plot',
-	#'poster' => 'poster',
-	'runtime' => 'runtime',
-	'storyline' => 'storyline',
-	'imdb_url' => 'imdb_url'
-);
-	
-	
 
 /* activation function */
 function th0ths_movie_collection_activate()
@@ -75,111 +56,110 @@ function th0ths_movie_collection_deactivate()
 
 function th0ths_movie_collection_post_type()
 {
-	global $th0ths_movie_collection_post_type;
-	
-	$post_type_labels = array(
-		'name' => __("Movies"),
-		'singular_name' => __("Movie"),
-		'add_new' => __("Add New"),
-		'add_new_item' => __("Add New Movie"),
-		'edit_item' => __("Edit Movie"),
-		'new_item' => __("New Movie"),
-		'view_item' => __("View Movie"),
-		'search_items' => __("Search Movies"),
-		'not_found' => __("No movies found"),
-		'not_found_in_trash' => __("No movies found in Trash"),
-		'menu_name' => __("Movies")
-	);
-	
-	$post_type_args = array(
-		'label' => __("Movies"),
-		'labels' => $post_type_labels,
-		'description' => __("Movie Collection"),
-		'public' => true,
-		'publicly_queryable' => true,
-		'exclude_from_search' => false,
-		'show_ui' => true,
-		'show_in_menu' => true,
-		'menu_position' => 5,
-		'menu_icon' => WP_PLUGIN_URL . '/th0ths-movie-collection/images/admin/menu-icon.png',
-		'capability_type' => 'post',
-		'hierarchical' => false,
-		'supports' => array('title', 'editor', 'custom-fields', 'comments'),
-		'has_archive' => true,
-		'rewrite' => true,
-		'can_export' => true
-	);
-		
-	
-	register_post_type($th0ths_movie_collection_post_type, $post_type_args);
+    global $th0ths_movie_collection_post_type;
+    
+    $post_type_labels = array(
+        'name' => __("Movies"),
+        'singular_name' => __("Movie"),
+        'add_new' => __("Add New"),
+        'add_new_item' => __("Add New Movie"),
+        'edit_item' => __("Edit Movie"),
+        'new_item' => __("New Movie"),
+        'view_item' => __("View Movie"),
+        'search_items' => __("Search Movies"),
+        'not_found' => __("No movies found"),
+        'not_found_in_trash' => __("No movies found in Trash"),
+        'menu_name' => __("Movies")
+    );
+    
+    $post_type_args = array(
+        'label' => __("Movies"),
+        'labels' => $post_type_labels,
+        'description' => __("Movie Collection"),
+        'public' => true,
+        'publicly_queryable' => true,
+        'exclude_from_search' => false,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'menu_icon' => WP_PLUGIN_URL . '/th0ths-movie-collection/images/admin/menu-icon.png',
+        'capability_type' => 'post',
+        'hierarchical' => false,
+        'supports' => array('title', 'editor', 'custom-fields', 'comments'),
+        'has_archive' => true,
+        'rewrite' => true,
+        'can_export' => true
+    );
+    
+    register_post_type($th0ths_movie_collection_post_type, $post_type_args);
 }
 
 function th0ths_movie_collection_fetch_data()
 {
-	global $post, $th0ths_movie_collection_movie_data;
-	
-	include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
-	
-	$movie['name'] = $post->post_title;
-	
-	$imdb = new Imdb();
-	$imdb_fetch = $imdb->getMovieInfo($movie['name']);
-	
-	foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
-	{
-		update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_data[$movie_meta]]);
-	}
-	
-	if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
-	{
-		$poster_info = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
-		update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
-		update_post_meta($post->ID, 'poster_html', $poster_info);
-	}
-	
-	update_option("test", $poster_info);
+    global $post;
+    
+    include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
+    
+    $movie['name'] = $post->post_title;
+    
+    $imdb = new Imdb();
+    $imdb_fetch = $imdb->getMovieInfo($movie['name']);
+    
+    foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
+    {
+        update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_data[$movie_meta]]);
+    }
+    
+    if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
+    {
+        $poster_info = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+        update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
+        update_post_meta($post->ID, 'poster_html', $poster_info);
+    }
+    
+    update_option("test", $poster_info);
 }
 
 function th0ths_movie_collection_content_filter($context)
 {
-	global $post, $th0ths_movie_collection_movie_data;
-	
-	if (get_post_type($post) == 'movies')
-	{
-		foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
-		{
-			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
-		}
-		?>
-		
-		<div class="th0ths_movie_collection_poster"><?php echo get_post_meta($post->ID, 'poster_html', true); ?></div>
-		
-		<?php
-		foreach (array_keys($movie) as $meta_key)
-		{
-			?>
-			<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
-			<?php
-		}
-		
-		if (!is_single($post))
-		{
-			?>
-			<a href="<?php the_permalink(); ?>"><?php _e("Read review..."); ?></a>
-			<?php
-		}
-		else
-		{
-			?>
-			<hr class="th0ths_movie_collection_seperate" />
-			<?php
-			echo $context;
-		}
-	}
-	else
-	{
-		return $context;
-	}
+    global $post;
+    
+    if (get_post_type($post) == 'movies')
+    {
+        foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
+        {
+            $movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
+        }
+        ?>
+        
+        <div class="th0ths_movie_collection_poster"><?php echo get_post_meta($post->ID, 'poster_html', true); ?></div>
+        
+        <?php
+        foreach (array_keys($movie) as $meta_key)
+        {
+            ?>
+            <div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
+            <?php
+        }
+        
+        if (!is_single($post))
+        {
+            ?>
+            <a href="<?php the_permalink(); ?>"><?php _e("Read review..."); ?></a>
+            <?php
+        }
+        else
+        {
+            ?>
+            <hr class="th0ths_movie_collection_seperate" />
+            <?php
+            echo $context;
+        }
+    }
+    else
+    {
+        return $context;
+    }
 }
 
 function th0ths_movie_collection_sc_newest($atts)
@@ -201,29 +181,101 @@ function th0ths_movie_collection_sc_best($atts)
 
 function th0ths_movie_collection_options()
 {
-	?>
-	<div class="wrap">
-		<h2><?php _e("Options"); ?></h2>
-		<form method="post">
-			<span>Download movie posters while adding movie?</span>
-			<p class="submit">
-				<input type="submit" class="button-primary" value="<?php _e("Save Changes") ?>" />
-			</p>
-		</form>
-	</div>
-	<?php
+    if (!empty($_POST))
+    {
+	print_r($_POST);
+	update_option('th0ths-movie-collection-settings', $_POST);
+    }
+    echo "Current: ";
+    print_r(get_option('th0ths-movie-collection-settings'));
+    ?>
+    <div class="wrap" id="th0ths_movie_collection_options">
+        <h2><?php _e("Options"); ?></h2>
+        <form method="post">
+	    <h3><?php _e("General Options"); ?></h3>
+	    <table class="form-table">
+		<tbody>
+		    <tr>
+			<th><label><?php _e("Labels to show"); ?></label></th>
+			<td>
+			    <select name="labels[]" id="labels" multiple="multiple" size="10">
+				<?php th0ths_movie_collection_options_option('labels', 'title', __("Title"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'poster', __("Poster"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'year', __("Year"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'rating', __("Rating"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'genres', __("Genres"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'directors', __("Directors"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'writers', __("Writers"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'stars', __("Stars"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'cast', __("Cast"), true); ?>
+				<?php th0ths_movie_collection_options_option('labels', 'storyline', __("Storyline"), true); ?>
+			    </select>
+			    <span class="description"><?php _e("You can select more than one by holding CTRL button while selecting."); ?>
+			</td>
+		    </tr>
+		    <tr>
+			<th><label><?php _e("Fetch info on edit"); ?></label></th>
+			<td>
+			    <select name="fetch" id="fetch">
+				<?php th0ths_movie_collection_options_option('fetch', 'yes', __("Yes")); ?>
+				<?php th0ths_movie_collection_options_option('fetch', 'no', __("No")); ?>
+			    </select>
+			    <span class="description"><?php _e("Fetch movie info from IMDB each time post is edited."); ?></span>
+		    </tr>
+		</tbody>
+	    </table>
+            <p class="submit">
+                <input type="submit" class="button-primary" value="<?php _e("Save Changes") ?>" />
+            </p>
+        </form>
+    </div>
+    <?php
+}
+
+function th0ths_movie_collection_options_option($name, $value, $text, $array=false)
+{
+    ?>
+    <option value="<?php echo $value; ?>"
+    <?php
+    
+    $options = get_option('th0ths-movie-collection-settings');
+    $option = $options[$name];
+    
+    if ($array == false)
+    {
+	if ($option == $value)
+	{
+	    ?> selected="selected"<?php
+	}
+	?>><?php echo $text; ?></option><?php
+    }
+    elseif ($array == true)
+    {
+	if (in_array($value, $option))
+	{
+	    ?> selected="selected"<?php
+	}
+	?>><?php echo $text; ?></option><?php
+    }
 }
 
 function th0ths_movie_collection_admin_menus()
 {
-	add_submenu_page('edit.php?post_type=movies', __("Options"), __("Options"), 'manage_options', 'th0ths_movie_collection_options', 'th0ths_movie_collection_options');
+    add_submenu_page('edit.php?post_type=movies', __("Options"), __("Options"), 'manage_options', 'th0ths_movie_collection_options', 'th0ths_movie_collection_options');
 }
 
 function th0ths_movie_collection_wp_head()
 {
-	?>
-	<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/th0ths-movie-collection/style/wp_head.css'; ?>" />
-	<?php
+    ?>
+<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/th0ths-movie-collection/style/wp_head.css'; ?>" />
+    <?php
+}
+
+function th0ths_movie_collection_admin_head()
+{
+    ?>
+<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/th0ths-movie-collection/style/admin_head.css'; ?>" />
+    <?php
 }
 
 /* register plugin status functions */
@@ -241,6 +293,7 @@ add_action('the_content', 'th0ths_movie_collection_content_filter');
 
 /* css */
 add_action('wp_head', 'th0ths_movie_collection_wp_head');
+add_action('admin_head', 'th0ths_movie_collection_admin_head');
 
 /* register shortcodes */
 add_shortcode('th0ths-movie-collection-newests', 'th0ths_movie_collection_sc_newest');
