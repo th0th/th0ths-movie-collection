@@ -157,7 +157,17 @@ function th0ths_movie_collection_content_filter($context)
 	    if ($meta_key != 'poster')
 	    {
 		?>
-		<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
+		<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
+		<?php
+		if (is_array($movie[$meta_key]))
+		{
+		    echo implode(', ', $movie[$meta_key]);
+		}
+		elseif (!is_array($movie[$meta_key]))
+		{
+		    echo $movie[$meta_key];
+		}
+		?></div>
 		<?php
 	    }
         }
