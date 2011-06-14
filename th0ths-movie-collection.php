@@ -117,9 +117,9 @@ function th0ths_movie_collection_fetch_data()
     $imdb = new Imdb();
     $imdb_fetch = $imdb->getMovieInfo($movie['name']);
     
-    foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
+    foreach (array_keys($imdb_labels) as $movie_meta)
     {
-        update_post_meta($post->ID, $movie_meta, $imdb_fetch[$th0ths_movie_collection_movie_data[$movie_meta]]);
+        update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
     }
     
     if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
