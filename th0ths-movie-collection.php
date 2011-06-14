@@ -151,6 +151,7 @@ function th0ths_movie_collection_content_filter($context)
         <div class="th0ths_movie_collection_poster"><?php echo get_post_meta($post->ID, 'poster_html', true); ?></div>
 	<?php } ?>
         
+	<div class="th0ths_movie_collection_labels">
         <?php
         foreach (array_keys($movie) as $meta_key)
         {
@@ -171,6 +172,9 @@ function th0ths_movie_collection_content_filter($context)
 		<?php
 	    }
         }
+	?>
+	</div>
+	<?php
         
         if (!is_single($post))
         {
