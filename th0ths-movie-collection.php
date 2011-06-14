@@ -124,9 +124,12 @@ function th0ths_movie_collection_content_filter($context)
 {
     global $post;
     
+    $options = get_option('th0ths-movie-collection-settings');
+    $labels = $options['labels'];
+    
     if (get_post_type($post) == 'movies')
     {
-        foreach (array_keys($th0ths_movie_collection_movie_data) as $movie_meta)
+        foreach ($labels as $movie_meta)
         {
             $movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
         }
@@ -286,6 +289,7 @@ add_action('init', 'th0ths_movie_collection_post_type');
 
 add_action('admin_menu', 'th0ths_movie_collection_admin_menus');
 
+/* fetch data from imdb */
 add_action('edit_post', 'th0ths_movie_collection_fetch_data');
 
 /* movies custom post type content filter */
