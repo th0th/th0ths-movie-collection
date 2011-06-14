@@ -143,10 +143,7 @@ function th0ths_movie_collection_content_filter($context)
     {
         foreach ($labels as $movie_meta)
         {
-	    if ($movie_meta != 'poster')
-	    {
-		$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
-	    }
+	    $movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
         }
         ?>
         
@@ -157,9 +154,12 @@ function th0ths_movie_collection_content_filter($context)
         <?php
         foreach (array_keys($movie) as $meta_key)
         {
-            ?>
-            <div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
-            <?php
+	    if ($meta_key != 'poster')
+	    {
+		?>
+		<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
+		<?php
+	    }
         }
         
         if (!is_single($post))
