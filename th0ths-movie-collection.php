@@ -161,6 +161,20 @@ function th0ths_movie_collection_content_filter($context)
 			<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b><?php _e($movie[$meta_key]); ?></div>
 			<?php
 		}
+		
+		if (!is_single($post))
+		{
+			?>
+			<a href="<?php the_permalink(); ?>"><?php _e("Read review..."); ?></a>
+			<?php
+		}
+		else
+		{
+			?>
+			<hr class="th0ths_movie_collection_seperate" />
+			<?php
+			echo $context;
+		}
 	}
 	else
 	{
@@ -205,6 +219,13 @@ function th0ths_movie_collection_admin_menus()
 	add_submenu_page('edit.php?post_type=movies', __("Options"), __("Options"), 'manage_options', 'th0ths_movie_collection_options', 'th0ths_movie_collection_options');
 }
 
+function th0ths_movie_collection_wp_head()
+{
+	?>
+	<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/th0ths-movie-collection/style/wp_head.css'; ?>" />
+	<?php
+}
+
 /* register plugin status functions */
 register_activation_hook(__FILE__, 'th0ths_movie_collection_activate');
 
@@ -215,7 +236,11 @@ add_action('admin_menu', 'th0ths_movie_collection_admin_menus');
 
 add_action('edit_post', 'th0ths_movie_collection_fetch_data');
 
+/* movies custom post type content filter */
 add_action('the_content', 'th0ths_movie_collection_content_filter');
+
+/* css */
+add_action('wp_head', 'th0ths_movie_collection_wp_head');
 
 /* register shortcodes */
 add_shortcode('th0ths-movie-collection-newests', 'th0ths_movie_collection_sc_newest');
