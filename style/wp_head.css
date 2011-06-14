@@ -1,6 +1,10 @@
+div.th0ths_movie_collection_labels {
+	font-size: 12px;
+}
+
 div.th0ths_movie_collection_poster {
 	float: left;
-	padding: 0 10px 10px 10px;
+	padding: 0 10px 4px 10px;
 }
 
 hr.th0ths_movie_collection_seperate {
