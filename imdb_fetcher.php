@@ -15,7 +15,7 @@ class Imdb
 {
     function getMovieInfoDirect($imdbID)
     {
-        $imdbUrl = "http://www.imdb.com/title/" . $imdbID;
+        $imdbUrl = "http://www.imdb.com/title/" . $imdbID . "/";
         $html = $this->geturl($imdbUrl);
         $arr = array();
         if(stripos($html, "<meta name=\"application-name\" content=\"IMDb\" />") !== false){

@@ -115,7 +115,7 @@ function th0ths_movie_collection_fetch_data()
     $movie['name'] = $post->post_title;
     
     $imdb = new Imdb();
-    $imdb_fetch = $imdb->getMovieInfo($movie['name']);
+    $imdb_fetch = $imdb->getMovieInfoDirect($movie['name']);
     
     foreach (array_keys($imdb_labels) as $movie_meta)
     {
