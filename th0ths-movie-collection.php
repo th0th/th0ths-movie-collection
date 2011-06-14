@@ -98,6 +98,18 @@ function th0ths_movie_collection_fetch_data()
 {
     global $post;
     
+    $imdb_labels = array(
+	'title' => 'title',
+	'year' => 'year',
+	'rating' => 'rating',
+	'genres' => 'genres',
+	'directors' => 'directors',
+	'writers' => 'writers',
+	'stars' => 'stars',
+	'cast' => 'cast',
+	'storyline' => 'storyline'
+    );
+    
     include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
     
     $movie['name'] = $post->post_title;
