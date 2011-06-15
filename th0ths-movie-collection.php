@@ -128,8 +128,6 @@ function th0ths_movie_collection_fetch_data()
         update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
         update_post_meta($post->ID, 'poster_html', $poster_info);
     }
-    
-    update_option("test", $poster_info);
 }
 
 function th0ths_movie_collection_content_filter($context)
