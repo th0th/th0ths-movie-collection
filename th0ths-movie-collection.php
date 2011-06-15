@@ -220,11 +220,8 @@ function th0ths_movie_collection_options()
 {
     if (!empty($_POST))
     {
-	print_r($_POST);
 	update_option('th0ths-movie-collection-settings', $_POST);
     }
-    echo "Current: ";
-    print_r(get_option('th0ths-movie-collection-settings'));
     ?>
     <div class="wrap" id="th0ths_movie_collection_options">
         <h2><?php _e("Options"); ?></h2>
