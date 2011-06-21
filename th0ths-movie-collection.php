@@ -204,7 +204,26 @@ function th0ths_movie_collection_content_filter($context)
 
 function th0ths_movie_collection_sc_newest($atts)
 {
-    echo "Newest movies.";
+	extract(shortcode_atts(array(
+		'n' => 5
+	), $atts));
+	
+	$args = array(
+		'post_type' => 'movies',
+		'orderby' => 'date',
+		'order' => 'DESC',
+		'posts_per_page' => $n
+	);
+	
+	query_posts($args);
+
+	while ( have_posts() ) : the_post();
+		echo '<li>';
+		the_title();
+		echo '</li>';
+	endwhile;
+
+	wp_reset_query();
 }
 
 function th0ths_movie_collection_sc_best($atts)
