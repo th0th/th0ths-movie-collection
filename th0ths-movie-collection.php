@@ -216,12 +216,20 @@ function th0ths_movie_collection_sc_newest($atts)
 	);
 	
 	query_posts($args);
-
-	while ( have_posts() ) : the_post();
-		echo '<li>';
-		the_title();
-		echo '</li>';
+	?><div id="th0ths_movie_collection_sc_newest"><?php
+	while (have_posts()) : the_post();
+		$movie_poster = get_post_meta(get_the_ID(), 'poster_html', TRUE);
+		$movie_storyline = get_post_meta(get_the_ID(), 'storyline', TRUE);
+		?>
+		<h2 style="margin: 0 0 8px;"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+		<div id="th0ths_movie_collection_sc_newest_inner">
+			<?php echo $movie_poster; ?>
+			<h3><?php _e("Storyline"); ?></h3>
+			<div><?php echo $movie_storyline; ?></div>
+		</div>
+		<?php
 	endwhile;
+	?></div><?php
 
 	wp_reset_query();
 }
