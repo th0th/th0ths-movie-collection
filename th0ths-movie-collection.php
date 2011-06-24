@@ -146,7 +146,7 @@ function th0ths_movie_collection_content_filter($context)
     {
         foreach ($labels as $movie_meta)
         {
-	    $movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
+			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
         }
         ?>
         
@@ -158,27 +158,30 @@ function th0ths_movie_collection_content_filter($context)
         <?php
         foreach (array_keys($movie) as $meta_key)
         {
-			if ($meta_key == 'rating')
+			if (!empty($movie[$meta_key]))
 			{
-				?>
-				<b><?php _e(strtoupper($meta_key)); ?>: </b><?php th0ths_movie_collection_rating2stars($movie[$meta_key]); ?> (<?php echo $movie[$meta_key]; ?>)
-				<?php
-			}
-			elseif ($meta_key != 'poster')
-			{
-				?>
-				<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
-				<?php
-				if (is_array($movie[$meta_key]))
+				if ($meta_key == 'rating')
 				{
-					echo implode(', ', $movie[$meta_key]);
+					?>
+					<b><?php _e(strtoupper($meta_key)); ?>: </b><?php th0ths_movie_collection_rating2stars($movie[$meta_key]); ?> (<?php echo $movie[$meta_key]; ?>)
+					<?php
 				}
-				else
+				elseif ($meta_key != 'poster')
 				{
-					echo $movie[$meta_key];
+					?>
+					<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
+					<?php
+					if (is_array($movie[$meta_key]))
+					{
+						echo implode(', ', $movie[$meta_key]);
+					}
+					else
+					{
+						echo $movie[$meta_key];
+					}
+					?></div>
+					<?php
 				}
-				?></div>
-				<?php
 			}
         }
 	?>
