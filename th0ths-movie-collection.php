@@ -158,22 +158,22 @@ function th0ths_movie_collection_content_filter($context)
         <?php
         foreach (array_keys($movie) as $meta_key)
         {
-	    if ($meta_key != 'poster')
-	    {
-		?>
-		<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
-		<?php
-		if (is_array($movie[$meta_key]))
-		{
-		    echo implode(', ', $movie[$meta_key]);
-		}
-		elseif (!is_array($movie[$meta_key]))
-		{
-		    echo $movie[$meta_key];
-		}
-		?></div>
-		<?php
-	    }
+			if ($meta_key != 'poster')
+			{
+				?>
+				<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
+				<?php
+				if (is_array($movie[$meta_key]))
+				{
+					echo implode(', ', $movie[$meta_key]);
+				}
+				elseif (!is_array($movie[$meta_key]))
+				{
+					echo $movie[$meta_key];
+				}
+				?></div>
+				<?php
+			}
         }
 	?>
 	</div>
@@ -221,9 +221,9 @@ function th0ths_movie_collection_sc_newest($atts)
 		$movie_poster = get_post_meta(get_the_ID(), 'poster_html', TRUE);
 		$movie_storyline = get_post_meta(get_the_ID(), 'storyline', TRUE);
 		?>
-		<h2 style="margin: 0 0 8px;"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+		<h2 style="margin: 0 0 8px;"><?php the_title(); ?></h2>
 		<div id="th0ths_movie_collection_sc_newest_inner">
-			<?php echo $movie_poster; ?>
+			<a href="<?php the_permalink(); ?>"><?php echo $movie_poster; ?></a>
 			<h3><?php _e("Storyline"); ?></h3>
 			<div><?php echo $movie_storyline; ?></div>
 		</div>
