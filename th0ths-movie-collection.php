@@ -158,7 +158,13 @@ function th0ths_movie_collection_content_filter($context)
         <?php
         foreach (array_keys($movie) as $meta_key)
         {
-			if ($meta_key != 'poster')
+			if ($meta_key == 'rating')
+			{
+				?>
+				<b><?php _e(strtoupper($meta_key)); ?>: </b><?php th0ths_movie_collection_rating2stars($movie[$meta_key]); ?> (<?php echo $movie[$meta_key]; ?>)
+				<?php
+			}
+			elseif ($meta_key != 'poster')
 			{
 				?>
 				<div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
@@ -167,7 +173,7 @@ function th0ths_movie_collection_content_filter($context)
 				{
 					echo implode(', ', $movie[$meta_key]);
 				}
-				elseif (!is_array($movie[$meta_key]))
+				else
 				{
 					echo $movie[$meta_key];
 				}
@@ -340,6 +346,37 @@ function th0ths_movie_collection_admin_head()
     ?>
 <link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL . '/th0ths-movie-collection/style/admin_head.css'; ?>" />
     <?php
+}
+
+function th0ths_movie_collection_rating2stars($rating)
+{
+	if ($rating == 0)
+	{
+		$stars = "0";
+	}
+	elseif ($rating < 2)
+	{
+		$stars = "1";
+	}
+	elseif ($rating < 4)
+	{
+		$stars = "2";
+	}
+	elseif ($rating < 6)
+	{
+		$stars = "3";
+	}
+	elseif ($rating < 8)
+	{
+		$stars = "4";
+	}
+	elseif ($rating < 10)
+	{
+		$stars = "5";
+	}
+	?>
+	<img src="<?php echo WP_PLUGIN_URL . "/th0ths-movie-collection/images/rating/$stars.png"; ?>" />
+	<?php
 }
 
 /* register plugin status functions */
