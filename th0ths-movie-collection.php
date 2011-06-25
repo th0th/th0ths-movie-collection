@@ -148,10 +148,14 @@ function th0ths_movie_collection_content_filter($context)
         {
 			$movie[$movie_meta] = get_post_meta($post->ID, $movie_meta, true);
         }
-        ?>
-        
-	<?php if (in_array('poster', $labels)) { ?>
-        <div class="th0ths_movie_collection_poster"><?php echo get_post_meta($post->ID, 'poster_html', true); ?></div>
+	?>
+	
+	<?php
+	
+	$poster_html = get_post_meta($post->ID, 'poster_html', true);
+	
+	if (!empty($poster_html)) { ?>
+        <div class="th0ths_movie_collection_poster"><?php echo $poster_html; ?></div>
 	<?php } ?>
         
 	<div class="th0ths_movie_collection_labels">
