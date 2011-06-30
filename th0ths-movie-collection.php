@@ -263,7 +263,7 @@ function th0ths_movie_collection_options()
 {
     if (!empty($_POST))
     {
-    update_option('th0ths-movie-collection-settings', $_POST);
+        update_option('th0ths-movie-collection-settings', $_POST);
     }
     ?>
     <div class="wrap" id="th0ths_movie_collection_options">
@@ -320,19 +320,19 @@ function th0ths_movie_collection_options_option($name, $value, $text, $array=fal
     
     if ($array == false)
     {
-    if ($option == $value)
-    {
-        ?> selected="selected"<?php
-    }
-    ?>><?php echo $text; ?></option><?php
+        if ($option == $value)
+        {
+            ?> selected="selected"<?php
+        }
+        ?>><?php echo $text; ?></option><?php
     }
     elseif ($array == true)
     {
-    if (in_array($value, $option))
-    {
-        ?> selected="selected"<?php
-    }
-    ?>><?php echo $text; ?></option><?php
+        if (in_array($value, $option))
+        {
+            ?> selected="selected"<?php
+        }
+        ?>><?php echo $text; ?></option><?php
     }
 }
 
