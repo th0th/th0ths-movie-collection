@@ -249,14 +249,34 @@ function th0ths_movie_collection_sc_newest($atts)
 
 function th0ths_movie_collection_sc_best($atts)
 {
-    if ( isset($atts['n']) )
-    {
-        echo "Best " . $atts['n'] . " movies.";
-    }
-    else
-    {
-        echo "Best movies.";
-    }
+    extract(shortcode_atts(array(
+        'n' => 5
+    ), $atts));
+    
+    $args = array(
+        'post_type' => 'movies',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'posts_per_page' => $n
+    );
+    
+    query_posts($args);
+    ?><div id="th0ths_movie_collection_sc_newest"><?php
+    while (have_posts()) : the_post();
+        $movie_poster = get_post_meta(get_the_ID(), 'poster_html', TRUE);
+        $movie_storyline = get_post_meta(get_the_ID(), 'storyline', TRUE);
+        ?>
+        <h2 style="margin: 0 0 8px;"><?php the_title(); ?></h2>
+        <div id="th0ths_movie_collection_sc_newest_inner">
+            <a href="<?php the_permalink(); ?>"><?php echo $movie_poster; ?></a>
+            <h3><?php _e("Storyline"); ?></h3>
+            <div><?php echo $movie_storyline; ?></div>
+        </div>
+        <?php
+    endwhile;
+    ?></div><?php
+
+    wp_reset_query();
 }
 
 function th0ths_movie_collection_options()
@@ -405,7 +425,7 @@ add_action('wp_head', 'th0ths_movie_collection_wp_head');
 add_action('admin_head', 'th0ths_movie_collection_admin_head');
 
 /* register shortcodes */
-add_shortcode('th0ths-movie-collection-newests', 'th0ths_movie_collection_sc_newest');
-add_shortcode('th0ths-movie-collection-bests', 'th0ths_movie_collection_sc_best');
+add_shortcode('th0ths-movie-collection-newest-movies', 'th0ths_movie_collection_sc_newest');
+add_shortcode('th0ths-movie-collection-best-movies', 'th0ths_movie_collection_sc_best');
 
 ?>
