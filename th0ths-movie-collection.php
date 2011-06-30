@@ -202,10 +202,10 @@ function th0ths_movie_collection_content_filter($context)
         {
             if (strlen($context) != 0)
             {
-            ?>
-            <hr class="th0ths_movie_collection_seperate" />
-            <?php
-            echo $context;
+                ?>
+                <hr class="th0ths_movie_collection_seperate" />
+                <?php
+                echo $context;
             }
         }
     }
