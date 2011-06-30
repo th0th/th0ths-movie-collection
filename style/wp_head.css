@@ -13,6 +13,12 @@ hr.th0ths_movie_collection_seperate {
 	margin-bottom: 10px;
 }
 
+div#th0ths_movie_collection_sc_newest_inner {
+	float: left;
+	text-align: justify;
+    margin: 0 0 40px 0;
+}
+
 /* newest movies shortcode */
 div#th0ths_movie_collection_sc_newest_inner img {
 	float: left;
@@ -21,9 +27,4 @@ div#th0ths_movie_collection_sc_newest_inner img {
 
 div#th0ths_movie_collection_sc_newest_inner h3 {
 	clear: right;
-}
-
-div#th0ths_movie_collection_sc_newest_inner {
-	float: left;
-	text-align: justify;
 }
