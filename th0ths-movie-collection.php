@@ -102,36 +102,36 @@ function th0ths_movie_collection_fetch_data()
     
     if (get_post_meta($post->ID, 'imdb_fetched', true) != 'yes' && $movie['imdb_id'] != '')
     {    
-    $imdb_labels = array(
-        'title' => 'title',
-        'year' => 'year',
-        'rating' => 'rating',
-        'genres' => 'genres',
-        'directors' => 'directors',
-        'writers' => 'writers',
-        'stars' => 'stars',
-        'cast' => 'cast',
-        'storyline' => 'storyline'
-    );
-    
-    include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
-    
-    $imdb = new Imdb();
-    $imdb_fetch = $imdb->getMovieInfoDirect($movie['imdb_id']);
-    
-    foreach (array_keys($imdb_labels) as $movie_meta)
-    {
-        update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
-    }
-    
-    if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
-    {
-        $poster_info = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
-        update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
-        update_post_meta($post->ID, 'poster_html', $poster_info);
-    }
-    
-    update_post_meta($post->ID, 'imdb_fetched', 'yes');
+        $imdb_labels = array(
+            'title' => 'title',
+            'year' => 'year',
+            'rating' => 'rating',
+            'genres' => 'genres',
+            'directors' => 'directors',
+            'writers' => 'writers',
+            'stars' => 'stars',
+            'cast' => 'cast',
+            'storyline' => 'storyline'
+        );
+        
+        include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
+        
+        $imdb = new Imdb();
+        $imdb_fetch = $imdb->getMovieInfoDirect($movie['imdb_id']);
+        
+        foreach (array_keys($imdb_labels) as $movie_meta)
+        {
+            update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
+        }
+        
+        if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
+        {
+            $poster_info = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+            update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
+            update_post_meta($post->ID, 'poster_html', $poster_info);
+        }
+        
+        update_post_meta($post->ID, 'imdb_fetched', 'yes');
     }
 }
 
