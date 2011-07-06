@@ -40,6 +40,16 @@ function th0ths_movie_collection_activate()
     /* get permalinks working */
     th0ths_movie_collection_post_type();
     flush_rewrite_rules();
+    
+    $default_plugin_settings = array(
+		'labels' => array('title', 'poster', 'year', 'rating', 'genres', 'directors', 'writers', 'stars', 'cast', 'storyline'),
+		'fetch' => 'no'
+	);
+	
+	if (get_option('th0ths-movie-collection-settings') == '')
+	{
+		update_option('th0ths-movie-collection-settings', $default_plugin_settings);
+	}
 }
 
 /* upgrade function */
