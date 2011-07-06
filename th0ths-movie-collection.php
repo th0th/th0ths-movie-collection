@@ -293,7 +293,12 @@ function th0ths_movie_collection_options()
 {
     if (!empty($_POST))
     {
-        update_option('th0ths-movie-collection-settings', $_POST);
+		$plugin_options = array(
+			'labels' => $_POST['labels'],
+			'fetch' => $_POST['fetch']
+		);
+		
+        update_option('th0ths-movie-collection-settings', $plugin_options);
     }
     ?>
     <div class="wrap" id="th0ths_movie_collection_options">
