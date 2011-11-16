@@ -128,7 +128,7 @@ function th0ths_movie_collection_fetch_data()
         include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
         
         $imdb = new Imdb();
-        $imdb_fetch = $imdb->getMovieInfoDirect($movie['imdb_id']);
+        $imdb_fetch = $imdb->getMovieInfoById($movie['imdb_id']);
         
         foreach (array_keys($imdb_labels) as $movie_meta)
         {

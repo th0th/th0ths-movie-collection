@@ -12,20 +12,6 @@
  
 class Imdb
 {
-    function getMovieInfoDirect($imdbID)
-    {
-        $imdbUrl = "http://www.imdb.com/title/" . $imdbID . "/";
-        $html = $this->geturl($imdbUrl);
-        $arr = array();
-        if(stripos($html, "<meta name=\"application-name\" content=\"IMDb\" />") !== false){
-            $arr = $this->scrapMovieInfo($html);
-            $arr['imdb_url'] = $imdbUrl;
-        } else {
-            $arr['error'] = "No Title found on IMDb!";
-        }
-        return $arr;
-    }
-    
     function getMovieInfo($title)
     {
         $imdbId = $this->getIMDbIdFromGoogle(trim($title));
