@@ -105,6 +105,7 @@ function th0ths_movie_collection_post_type()
     register_post_type($th0ths_movie_collection_post_type, $post_type_args);
 }
 
+/* imdb fetcher function */
 function th0ths_movie_collection_fetch_data()
 {
     global $post;
@@ -146,6 +147,7 @@ function th0ths_movie_collection_fetch_data()
     }
 }
 
+/* content filter for movie displaying page */
 function th0ths_movie_collection_content_filter($context)
 {
     global $post;
@@ -226,6 +228,7 @@ function th0ths_movie_collection_content_filter($context)
     }
 }
 
+/* shortcode for displaying newest movies */
 function th0ths_movie_collection_sc_newest($atts)
 {
     extract(shortcode_atts(array(
@@ -258,6 +261,7 @@ function th0ths_movie_collection_sc_newest($atts)
     wp_reset_query();
 }
 
+/* shortcode for displaying best movies (based on rating) */
 function th0ths_movie_collection_sc_best($atts)
 {
     extract(shortcode_atts(array(
@@ -290,6 +294,7 @@ function th0ths_movie_collection_sc_best($atts)
     wp_reset_query();
 }
 
+/* plugin options page */
 function th0ths_movie_collection_options()
 {
     if (!empty($_POST))
