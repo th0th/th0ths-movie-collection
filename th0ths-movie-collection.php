@@ -39,7 +39,7 @@ function th0ths_movie_collection_activate()
     
     /* get permalinks working */
     th0ths_movie_collection_post_type();
-    flush_rewrite_rules();
+    flush_rewrite_rules(true);
     
     $default_plugin_settings = array(
 		'labels' => array('title', 'poster', 'year', 'rating', 'genres', 'directors', 'writers', 'stars', 'cast', 'storyline'),
