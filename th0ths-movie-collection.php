@@ -178,13 +178,13 @@ function th0ths_movie_collection_content_filter($context)
                 if ($meta_key == 'rating')
                 {
                     ?>
-                    <b><?php _e(strtoupper($meta_key)); ?>: </b><?php th0ths_movie_collection_rating2stars($movie[$meta_key]); ?> (<?php echo $movie[$meta_key]; ?>)
+                    <strong><?php _e(strtoupper($meta_key)); ?>: </strong><?php th0ths_movie_collection_rating2stars($movie[$meta_key]); ?> (<?php echo $movie[$meta_key]; ?>)
                     <?php
                 }
                 elseif ($meta_key != 'poster')
                 {
                     ?>
-                    <div class="<?php echo $meta_key; ?>"><b><?php _e(strtoupper($meta_key)); ?>: </b>
+                    <div class="<?php echo $meta_key; ?>"><strong><?php _e(strtoupper($meta_key)); ?>: </strong>
                     <?php
                     if (is_array($movie[$meta_key]))
                     {
