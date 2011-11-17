@@ -2,7 +2,7 @@
 /*
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://returnfalse.net/log/
-Description: A plugin that enables you to your movie collection with ratings on your WordPress.
+Description: A plugin that enables you to share your movie collection with ratings on your WordPress.
 Version: 0.1
 Author: Hüseyin Gökhan Sarı
 Author URI: https://returnfalse.net/
