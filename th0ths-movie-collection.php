@@ -167,8 +167,6 @@ function th0ths_movie_collection_content_filter($context)
     
     $poster_html = get_post_meta($post->ID, 'poster_html', true);
     
-    ob_start();
-    
     if (!empty($poster_html)) { ?>
         <div class="th0ths_movie_collection_poster"><?php echo $poster_html; ?></div>
     <?php } ?>
@@ -228,7 +226,6 @@ function th0ths_movie_collection_content_filter($context)
     {
         return $context;
     }
-    return ob_get_clean();
 }
 
 /* shortcode for displaying newest movies */
