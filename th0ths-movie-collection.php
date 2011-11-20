@@ -453,4 +453,6 @@ add_action('admin_head', 'th0ths_movie_collection_admin_head');
 add_shortcode('th0ths-movie-collection-newest-movies', 'th0ths_movie_collection_sc_newest');
 add_shortcode('th0ths-movie-collection-best-movies', 'th0ths_movie_collection_sc_best');
 
+include "th0ths-movie-collection-widgets.php";
+
 ?>

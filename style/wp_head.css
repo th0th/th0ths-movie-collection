@@ -28,3 +28,11 @@ div#th0ths_movie_collection_sc_newest_inner img {
 div#th0ths_movie_collection_sc_newest_inner h3 {
 	clear: right;
 }
+
+div.th0ths-movie-collection-widget-poster, div.th0ths-movie-collection-widget-title {
+    text-align: center;
+}
+
+div.th0ths-movie-collection-widget-poster img {
+    width: 120px;
+}
