@@ -388,6 +388,31 @@ function th0ths_movie_collection_wp_head()
 {
     ?>
 <link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/style/wp_head.css" />
+
+<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/style/widget-slider.css" />
+<script language="javascript" type="text/javascript" src="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/js/mootools-1.2.1-core.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/js/mootools-1.2-more.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/js/slideitmoo-1.1.js"></script>
+
+<script language="javascript" type="text/javascript">
+	window.addEvents({
+		'domready': function(){
+			/* thumbnails example , div containers */
+			new SlideItMoo({
+						overallContainer: 'th0ths-movie-collection-slider-outer',
+						elementScrolled: 'th0ths-movie-collection-slider-inner',
+						thumbsContainer: 'th0ths-movie-collection-slider-items',		
+						itemsVisible:1,
+						elemsSlide:1,
+						duration:300,
+						itemsSelector: '.th0ths-movie-collection-slider-element',
+						itemWidth: 158,
+						showControls:1,
+						startIndex:1			
+			});
+		}
+	});
+</script>
     <?php
 }
 

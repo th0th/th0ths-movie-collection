@@ -34,12 +34,34 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
         echo $before_widget;
         if ($title)
             echo $before_title . $title . $after_title; ?>
-            <?php foreach ($movies as $movie) { ?>
+            <?php if (count($movies) == 1) {
+                $movie = $movies[0];
+                ?>
                 <div class="th0ths-movie-collection-widget-poster">
                     <a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a>
                 </div>
                 <div class="th0ths-movie-collection-widget-title">
                     <a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a>
+                </div>
+            <?php
+            }
+            elseif (count($movies) > 1) { ?>
+                <div id="th0ths-movie-collection-slider-outer">
+                    <div class="th0ths-movie-collection-slider-back"><!--slide back button--></div>
+                    <div id="th0ths-movie-collection-slider-inner">
+                        <div id="th0ths-movie-collection-slider-items">
+                <?php foreach ($movies as $movie) { ?>
+                <div class="th0ths-movie-collection-slider-element">
+                    <a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a>
+                    
+                    <p>
+                        <a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a>
+                    </p>
+                </div>						
+                <?php } ?>
+                        </div>
+                    </div>
+                    <div class="th0ths-movie-collection-slider-forward"><!--slide forward button--></div>
                 </div>
             <?php } ?>
         <?php echo $after_widget;
