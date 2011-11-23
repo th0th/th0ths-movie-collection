@@ -169,7 +169,7 @@ function th0ths_movie_collection_content_filter($context)
     
     $poster_html = get_post_meta($post->ID, 'poster_html', true);
     
-    if (!empty($poster_html)) { ?>
+    if (!empty($poster_html) && in_array('poster', $labels)) { ?>
         <div class="th0ths_movie_collection_poster"><?php echo $poster_html; ?></div>
     <?php } ?>
         
