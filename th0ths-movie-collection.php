@@ -150,6 +150,8 @@ function th0ths_movie_collection_fetch_data()
 /* content filter for movie displaying page */
 function th0ths_movie_collection_content_filter($context)
 {
+    ob_start();
+    
     global $post;
     
     $options = get_option('th0ths-movie-collection-settings');
@@ -226,6 +228,8 @@ function th0ths_movie_collection_content_filter($context)
     {
         return $context;
     }
+    
+    return ob_get_clean();
 }
 
 /* shortcode for displaying newest movies */
