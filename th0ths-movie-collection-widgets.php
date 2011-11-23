@@ -85,7 +85,7 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
         }
         else
         {
-            $title = __( 'New title', 'text_domain' );
+            $title = __( 'Newest Movies', 'text_domain' );
             $number_of_movies = 1;
         }
         ?>
