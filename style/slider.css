@@ -23,19 +23,19 @@
 }
 
 #slideleft {
-    background: url(../images/widget/icons.gif) -50px -290px no-repeat;
+    background: url(../images/widget/icons.gif) -50px -280px no-repeat;
 }
 
 #slideleft:hover {
-    background-position: -0 -290px;
+    background-position: -0 -280px;
 }
 
 #slideright {
-    background: url(../images/widget/icons.gif) 0 65px no-repeat;
+    background: url(../images/widget/icons.gif) 0 75px no-repeat;
 }
 
 #slideright:hover {
-    background-position: -50px 65px;
+    background-position: -50px 75px;
 }
 
 #th0ths_movie_collection_slider {
