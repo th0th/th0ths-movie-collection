@@ -391,7 +391,12 @@ function th0ths_movie_collection_admin_menus()
 function th0ths_movie_collection_wp_head()
 {
     ?>
+<!-- th0th's Movie Collection header starts -->
 <link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/style/wp_head.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/style/slider.css" />
+
+<script type="text/javascript" src="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/js/tinyslider2.js"></script>
+<!-- th0th's Movie Collection header ends -->
     <?php
 }
 
