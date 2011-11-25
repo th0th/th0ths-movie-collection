@@ -59,10 +59,10 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
                         
                         <div class="sliderbutton" id="slideright" onclick="slideshow.move(1)"></div>
                         <ul id="pagination" class="pagination">
-                            <li onclick="slideshow.pos(0)"></li>
-                            <li onclick="slideshow.pos(1)"></li>
-                            <li onclick="slideshow.pos(2)"></li>
-                            <li onclick="slideshow.pos(3)"></li>
+                            <?php for ($i = 0; $i < count($movies); $i++)
+                            { ?>
+                            <li onclick="slideshow.pos(<?php echo $i; ?>)"></li>
+                            <?php } ?>
                         </ul>
                     </div><?php /* th0ths_movie_collection_slider_container ends */ ?>
                 </div><?php /* th0ths_movie_collection_slider_wrapper ends */ ?>
