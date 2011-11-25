@@ -1,12 +1,12 @@
 #th0ths_movie_collection_slider_wrapper {
-    width:180px;
+    width: 180px;
     margin-top: 5px;
 }
 
 #th0ths_movie_collection_slider_container {
-    position:relative;
-    background:#fff;
-    height:179px;
+    position: relative;
+    background: #fff;
+    height: 179px;
 }
 
 #th0ths_movie_collection_slider_container p {
@@ -16,66 +16,67 @@
 }
 
 .sliderbutton {
-    float:left;
-    width:25px;
-    height:179px;
-    cursor:pointer;
+    float: left;
+    width: 25px;
+    height: 179px;
+    cursor: pointer;
 }
 
 #slideleft {
-    background:url(../images/widget/icons.gif) -50px -290px no-repeat;
+    background: url(../images/widget/icons.gif) -50px -290px no-repeat;
 }
 
 #slideleft:hover {
-    background-position:-0 -290px;
+    background-position: -0 -290px;
 }
 
 #slideright {
-    background:url(../images/widget/icons.gif) 0 65px no-repeat;
+    background: url(../images/widget/icons.gif) 0 65px no-repeat;
 }
 
 #slideright:hover {
-    background-position:-50px 65px;
+    background-position: -50px 65px;
 }
 
 #th0ths_movie_collection_slider {
-    float:left;
-    position:relative;
-    overflow:auto;
-    width:121px;
-    height:220px;
+    float: left;
+    position: relative;
+    overflow: auto;
+    width: 130px;
+    height: 220px;
 }
 
 #th0ths_movie_collection_slider ul {
-    position:absolute;
-    list-style:none;
-    top:0;
-    left:0;
+    position: absolute;
+    list-style: none;
+    top: 0;
+    left: 0;
 }
 
 #th0ths_movie_collection_slider li {
-    float:left;
-    width:125px;
-    height:220px;
+    float: left;
+    width: 134px;
+    height: 220px;
 }
 
 .pagination {
-    position:absolute;
-    top:40px;
-    right:61px;
-    list-style:none;
-    height:25px;
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 30px;
+    list-style: none;
+    height: 25px;
 }
 
 .pagination li {
-    float:left;
-    cursor:pointer;
-    height:8px;
-    width:8px;
-    background:#ccc margin:0 4px 0 0;
-    border:1px solid #fff;
+    float: left;
+    cursor: pointer;
+    height: 8px;
+    width: 8px;
+    background: #ccc margin:0 4px 0 0;
+    border: 1px solid #fff;
 }
 
 .pagination li:hover, li.current {
-    background:#fff;
+    background: #fff;
 }
