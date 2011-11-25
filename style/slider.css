@@ -1,5 +1,5 @@
 #th0ths_movie_collection_slider_wrapper {
-    width:260px;
+    width:180px;
     margin-top: 5px;
 }
 
@@ -7,6 +7,12 @@
     position:relative;
     background:#fff;
     height:179px;
+}
+
+#th0ths_movie_collection_slider_container p {
+    font-size: 10px;
+    line-height: 10px;
+    text-align: center;
 }
 
 .sliderbutton {
@@ -37,7 +43,7 @@
     position:relative;
     overflow:auto;
     width:121px;
-    height:179px;
+    height:220px;
 }
 
 #th0ths_movie_collection_slider ul {
@@ -50,7 +56,7 @@
 #th0ths_movie_collection_slider li {
     float:left;
     width:125px;
-    height:179px;
+    height:220px;
 }
 
 .pagination {

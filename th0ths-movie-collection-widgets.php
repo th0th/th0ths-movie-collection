@@ -52,7 +52,10 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
                         <div id="th0ths_movie_collection_slider">
                             <ul>
                                 <?php foreach ($movies as $movie) { ?>
-                                    <li><a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a></li>
+                                    <li>
+                                        <a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a>
+                                        <p><a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a></p>
+                                    </li>
                                 <?php } ?>
                             </ul>
                         </div>
