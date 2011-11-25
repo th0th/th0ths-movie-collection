@@ -1,4 +1,4 @@
-#th0ths_movie_collection_slider_wrapper {width:240px; margin:50px auto}
+#th0ths_movie_collection_slider_wrapper {width:240px; margin-top: 5px;}
 #th0ths_movie_collection_slider_container {position:relative; background:#fff; height:179px;}
 .sliderbutton {float:left; width:25px; height:179px; cursor:pointer}
 #slideleft {background:url(../images/widget/icons.gif) -50px -265px no-repeat}
