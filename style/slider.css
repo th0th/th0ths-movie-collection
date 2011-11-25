@@ -1,5 +1,5 @@
 #th0ths_movie_collection_slider_wrapper {
-    width:240px;
+    width:260px;
     margin-top: 5px;
 }
 
@@ -17,26 +17,26 @@
 }
 
 #slideleft {
-    background:url(../images/widget/icons.gif) -50px -265px no-repeat;
+    background:url(../images/widget/icons.gif) -50px -290px no-repeat;
 }
 
 #slideleft:hover {
-    background-position:-0 -265px;
+    background-position:-0 -290px;
 }
 
 #slideright {
-    background:url(../images/widget/icons.gif) 0 90px no-repeat;
+    background:url(../images/widget/icons.gif) 0 65px no-repeat;
 }
 
 #slideright:hover {
-    background-position:-50px 90px;
+    background-position:-50px 65px;
 }
 
 #th0ths_movie_collection_slider {
     float:left;
     position:relative;
     overflow:auto;
-    width:125px;
+    width:121px;
     height:179px;
 }
 
