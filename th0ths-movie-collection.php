@@ -169,9 +169,18 @@ function th0ths_movie_collection_content_filter($context)
     
     $poster_html = get_post_meta($post->ID, 'poster_html', true);
     
-    if (!empty($poster_html) && in_array('poster', $labels)) { ?>
-        <div class="th0ths_movie_collection_poster"><?php echo $poster_html; ?></div>
-    <?php } ?>
+    if (in_array('poster', $labels)) {
+        if (!empty($poster_html)) { ?>
+            <div class="th0ths_movie_collection_poster">
+                <?php echo $poster_html; ?>
+            </div>
+        <?php }
+        else { ?>
+            <div class="th0ths_movie_collection_poster">
+                <img src="<?php echo WP_PLUGIN_URL; ?>/th0ths-movie-collection/images/no_poster.png" />
+            </div>
+        <?php }
+    } ?>
         
     <div class="th0ths_movie_collection_labels">
         <?php
