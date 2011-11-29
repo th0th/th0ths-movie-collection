@@ -41,7 +41,9 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
                     <a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a>
                 </div>
                 <div class="th0ths-movie-collection-widget-title">
-                    <a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a>
+                    <p>
+                        <a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a>
+                    </p>
                 </div>
             <?php
             }
