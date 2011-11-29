@@ -38,6 +38,12 @@ div.th0ths-movie-collection-widget-poster, div.th0ths-movie-collection-widget-ti
     text-align: center;
 }
 
+div.th0ths-movie-collection-widget-title p {
+    font-size: 10px;
+    line-height: 10px;
+    margin-top: 6px;
+}
+
 div.th0ths-movie-collection-widget-poster img {
-    width: 120px;
+    width: 130px;
 }
