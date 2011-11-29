@@ -13,6 +13,11 @@
     font-size: 10px;
     line-height: 10px;
     text-align: center;
+    margin-top: 6px;
+}
+
+#th0ths_movie_collection_slider_container img {
+    width: 130px;
 }
 
 .sliderbutton {
@@ -51,12 +56,14 @@
     list-style: none;
     top: 0;
     left: 0;
+    padding: 0;
 }
 
 #th0ths_movie_collection_slider li {
     float: left;
     width: 134px;
-    height: 220px;
+    height: 230px;
+    padding: 0;
 }
 
 .pagination {
