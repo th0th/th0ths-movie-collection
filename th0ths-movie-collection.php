@@ -134,21 +134,21 @@ function th0ths_movie_collection_fetch_data()
         if (empty($imdb_fetch['poster']))
         {
             $imdb_fetch['poster'] = WP_PLUGIN_URL . '/th0ths-movie-collection/images/no_poster.png';
-            }
+            $poster_html = "<img src=\"" . $imdb_fetch['poster'] . "\" alt=\"Movie Poster\" / >";
+        }
+        else
+        {
+            $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+        }
         
         foreach (array_keys($imdb_labels) as $movie_meta)
         {
             update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
         }
         
-        if (get_post_meta($post->ID, 'poster', true) != $imdb_fetch['poster'])
-        {
-            $poster_info = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+        $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
             
-            update_post_meta($post->ID, 'poster', $imdb_fetch['poster']);
-            update_post_meta($post->ID, 'poster_html', $poster_info);
-        }
-        
+        update_post_meta($post->ID, 'poster_html', $poster_html);
         update_post_meta($post->ID, 'imdb_fetched', 'yes');
     }
 }
