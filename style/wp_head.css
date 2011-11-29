@@ -34,6 +34,10 @@ div#th0ths_movie_collection_sc_newest_inner h3 {
 	clear: right;
 }
 
+div.th0ths-movie-collection-widget-poster {
+    margin-top: 5px;
+}
+
 div.th0ths-movie-collection-widget-poster, div.th0ths-movie-collection-widget-title {
     text-align: center;
 }
