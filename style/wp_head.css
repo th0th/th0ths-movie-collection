@@ -32,22 +32,24 @@ div.th0ths_movie_collection_widget_title p {
     margin-top: 6px;
 }
 
-/* shortcode */
-
-div.th0ths_movie_collection_sc_single {
-    margin-bottom: 20px;
-    overflow: auto;
-}
-
 div.th0ths_movie_collection_widget_poster img {
     width: 130px;
 }
 
-div.th0ths_movie_collection_sc_single_poster img {
-    float: left;
+/* shortcode */
+
+div.th0ths_movie_collection_sc_wrapper {
+    /* pass */
 }
 
-div.th0ths_movie_collection_sc_single_content {
+div.th0ths_movie_collection_sc_single {
+    width: 100%;
+    padding-bottom: 20px;
+    overflow: auto;
+    border-bottom: 1px solid #B7B7B7;
+}
+
+div.th0ths_movie_collection_sc_single_poster {
     float: left;
-    margin-left: 14px;
+    margin-right: 12px;
 }

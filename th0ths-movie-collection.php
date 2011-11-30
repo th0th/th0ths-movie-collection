@@ -259,8 +259,10 @@ function th0ths_movie_collection_sc_newest($atts)
     
     foreach ($movies_posts as $movies_post)
     {
+        $movies[$movies_post->ID]->post_id = $movies_post->ID;
         $movies[$movies_post->ID]->title = $movies_post->post_title;
         $movies[$movies_post->ID]->poster_html = get_post_meta($movies_post->ID, 'poster_html', true);
+        $movies[$movies_post->ID]->storyline = get_post_meta($movies_post->ID, 'storyline', true);
     }
     
     ob_start(); ?>
@@ -269,12 +271,12 @@ function th0ths_movie_collection_sc_newest($atts)
     
     <?php foreach ($movies as $movie) { ?>
         <div class="th0ths_movie_collection_sc_single">
-            <h2 class="th0ths_movie_collection_sc_single_title"><?php echo $movie->title; ?></h2>
+            <h1 class="entry-title"><a href="<?php echo get_permalink($movie->post_id); ?>"><?php echo $movie->title; ?></a></h2>
             <div class="th0ths_movie_collection_sc_single_poster">
                 <?php echo $movie->poster_html; ?>
             </div>
             <div class="th0ths_movie_collection_sc_single_content">
-                <p>Labels</p>
+                <p><?php echo $movie->storyline; ?></p>
             </div>
         </div>
     <?php } ?>
