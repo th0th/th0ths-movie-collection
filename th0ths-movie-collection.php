@@ -254,23 +254,35 @@ function th0ths_movie_collection_sc_newest($atts)
         'posts_per_page' => $n
     );
     
-    query_posts($args);
-    ?><div id="th0ths_movie_collection_sc_newest"><?php
-    while (have_posts()) : the_post();
-        $movie_poster = get_post_meta(get_the_ID(), 'poster_html', TRUE);
-        $movie_storyline = get_post_meta(get_the_ID(), 'storyline', TRUE);
-        ?>
-        <h2 style="margin: 0 0 8px;"><?php the_title(); ?></h2>
-        <div id="th0ths_movie_collection_sc_newest_inner">
-            <a href="<?php the_permalink(); ?>"><?php echo $movie_poster; ?></a>
-            <h3><?php _e("Storyline"); ?></h3>
-            <div><?php echo $movie_storyline; ?></div>
+    $movies_posts = get_posts($args);
+    $movies = array();
+    
+    foreach ($movies_posts as $movies_post)
+    {
+        $movies[$movies_post->ID]->title = $movies_post->post_title;
+        $movies[$movies_post->ID]->poster_html = get_post_meta($movies_post->ID, 'poster_html', true);
+    }
+    
+    ob_start(); ?>
+    
+    <div class="th0ths_movie_collection_sc_wrapper">
+    
+    <?php foreach ($movies as $movie) { ?>
+        <div class="th0ths_movie_collection_sc_single">
+            <h2 class="th0ths_movie_collection_sc_single_title"><?php echo $movie->title; ?></h2>
+            <div class="th0ths_movie_collection_sc_single_poster">
+                <?php echo $movie->poster_html; ?>
+            </div>
+            <div class="th0ths_movie_collection_sc_single_content">
+                <p>Labels</p>
+            </div>
         </div>
-        <?php
-    endwhile;
-    ?></div><?php
-
-    wp_reset_query();
+    <?php } ?>
+    
+    </div>
+    
+    <?php
+    return ob_get_clean();
 }
 
 /* shortcode for displaying best movies (based on rating) */
@@ -312,7 +324,7 @@ function th0ths_movie_collection_options()
     if (!empty($_POST))
     {
 		$plugin_options = array(
-			'labels' => $_POST['labels'],
+			'labels' => @$_POST['labels'],
 			'fetch' => $_POST['fetch']
 		);
 		
@@ -326,31 +338,32 @@ function th0ths_movie_collection_options()
         <table class="form-table">
         <tbody>
             <tr>
-            <th><label><?php _e("Labels to show"); ?></label></th>
-            <td>
-                <select name="labels[]" id="labels" multiple="multiple" size="10">
-                <?php th0ths_movie_collection_options_option('labels', 'title', __("Title"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'poster', __("Poster"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'year', __("Year"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'rating', __("Rating"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'genres', __("Genres"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'directors', __("Directors"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'writers', __("Writers"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'stars', __("Stars"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'cast', __("Cast"), true); ?>
-                <?php th0ths_movie_collection_options_option('labels', 'storyline', __("Storyline"), true); ?>
-                </select>
-                <span class="description"><?php _e("You can select more than one by holding CTRL button while selecting."); ?>
-            </td>
+                <th><label><?php _e("Labels to show"); ?></label></th>
+                <td>
+                    <select name="labels[]" id="labels" multiple="multiple" size="10">
+                    <?php th0ths_movie_collection_options_option('labels', 'title', __("Title"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'poster', __("Poster"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'year', __("Year"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'rating', __("Rating"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'genres', __("Genres"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'directors', __("Directors"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'writers', __("Writers"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'stars', __("Stars"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'cast', __("Cast"), true); ?>
+                    <?php th0ths_movie_collection_options_option('labels', 'storyline', __("Storyline"), true); ?>
+                    </select>
+                    <span class="description"><?php _e("You can select more than one by holding CTRL button while selecting."); ?>
+                </td>
             </tr>
             <tr>
-            <th><label><?php _e("Fetch info on edit"); ?></label></th>
-            <td>
-                <select name="fetch" id="fetch">
-                <?php th0ths_movie_collection_options_option('fetch', 'yes', __("Yes")); ?>
-                <?php th0ths_movie_collection_options_option('fetch', 'no', __("No")); ?>
-                </select>
-                <span class="description"><?php _e("Fetch movie info from IMDB each time post is edited."); ?></span>
+                <th><label><?php _e("Fetch info on edit"); ?></label></th>
+                <td>
+                    <select name="fetch" id="fetch">
+                    <?php th0ths_movie_collection_options_option('fetch', 'yes', __("Yes")); ?>
+                    <?php th0ths_movie_collection_options_option('fetch', 'no', __("No")); ?>
+                    </select>
+                    <span class="description"><?php _e("Fetch movie info from IMDB each time post is edited."); ?></span>
+                </td>
             </tr>
         </tbody>
         </table>
@@ -381,7 +394,7 @@ function th0ths_movie_collection_options_option($name, $value, $text, $array=fal
     }
     elseif ($array == true)
     {
-        if (in_array($value, $option))
+        if (@in_array($value, $option))
         {
             ?> selected="selected"<?php
         }
