@@ -42,7 +42,7 @@ function th0ths_movie_collection_activate()
     flush_rewrite_rules(true);
     
     $default_plugin_settings = array(
-		'labels' => array('title', 'poster', 'year', 'rating', 'genres', 'directors', 'writers', 'stars', 'cast', 'storyline'),
+		'labels' => array('title', 'poster', 'rating', 'genres'),
 		'fetch' => 'no'
 	);
 	
@@ -280,6 +280,7 @@ function th0ths_movie_collection_sc_newest($atts)
             </div>
             <div class="th0ths_movie_collection_sc_single_content">
                 <p><?php echo $movie->storyline; ?></p>
+                <p><a href="<?php echo get_permalink($movie->post_id); ?>">Read review...</a></p>
             </div>
         </div>
     <?php } ?>
