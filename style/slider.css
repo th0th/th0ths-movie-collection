@@ -11,9 +11,7 @@
 
 #th0ths_movie_collection_slider_container p {
     font-size: 10px;
-    line-height: 10px;
     text-align: center;
-    margin-top: 6px;
 }
 
 #th0ths_movie_collection_slider_container img {
@@ -48,7 +46,7 @@
     position: relative;
     overflow: auto;
     width: 130px;
-    height: 220px;
+    height: 230px;
 }
 
 #th0ths_movie_collection_slider ul {
