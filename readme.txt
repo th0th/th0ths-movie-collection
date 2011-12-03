@@ -6,7 +6,7 @@ Requires at least: 3.2.1
 Tested up to: 3.2.1
 Stable tag: 0.1
 
-A plugin allows you to share your favorite movies on your blog.
+A plugin that enables you to share your movie collection with ratings on your WordPress.
 
 == Description ==
 
@@ -21,6 +21,8 @@ Plugin fetches movie information from internet using imdb id of movie. You write
 * Shortcodes (you can show your movies in a post or in a page)
 
 **NOTE:** Shortcode feature is under development and may be a bit unstable right now.
+
+**IMPORTANT:** IMDb have a notice in their ToS stating scraping data from IMDb is not allowed and this plugin does some scraping. I, as developer of this plugin, don't take any responsibility about this issue. Using this plugin means you accept this responsibility.
 
 == Installation ==
 
