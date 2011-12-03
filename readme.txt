@@ -31,9 +31,11 @@ Plugin fetches movie information from internet using imdb id of movie. You write
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
-2. This is the second screen shot
+1. Displaying a movie on /movies page
+2. A movie's individual page including review
+3. Widget for newest movies
+4. Movie management page
+5. Plugin's options page
 
 == Changelog ==
 
