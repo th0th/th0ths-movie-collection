@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: movie collection, movies, sidebar, widget
 Requires at least: 3.2.1
 Tested up to: 3.2.1
-Stable tag: 0.2
+Stable tag: 0.3
 
 A plugin that enables you to share your movie collection with ratings on your WordPress.
 
@@ -46,6 +46,9 @@ Please don't hesitate to leave your comments and point the issues you encountere
 5. Plugin's options page
 
 == Changelog ==
+
+= 0.3 =
+* Some eyecandy stuff (layout is a bit changed).
 
 = 0.2 =
 * Plugin is set to display less information about movie by default.
