@@ -66,6 +66,7 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
                     <li onclick="slideshow.pos(2)"></li>
                     <li onclick="slideshow.pos(3)"></li>
                 </ul>
+                <div class="th0ths_movie_collection_cleanser"></div>
                 
                 <script type="text/javascript">
                 var slideshow=new TINY.slider.slide('slideshow',{
