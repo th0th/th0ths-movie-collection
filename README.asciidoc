@@ -55,3 +55,6 @@ Please don't hesitate to leave your comments and point the issues you encountere
 
 === 0.1 ===
 * First release.
+
+== More ??
+* You can support development of this plugin by donations. https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9D9EFHMXPRUW6[Donate via Paypal]
