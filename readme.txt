@@ -48,4 +48,4 @@ First, get your movie's IMDb id, this is required to fetch movie information. Us
 
 Movie information fetching will be done using *Custom Fields*. Scroll down a bit and you will see *Custom Fields* part. Type `imdb_id` as the `Name` of the custom field and your movie's IMDb id as `value`. And you are done. When you press the `Publish` button, movie information will be fetched and you will have a new posts-page-like movies-page in `http://your_blog_url.tld/movies`.
 
-Please don't hesitate to leave your comments and issues you encountered on project's [GitHub page](https://github.com/th0th/th0ths-movie-collection "th0ths-movie-collection - GitHub").
+Please don't hesitate to leave your comments and point the issues you encountered on project's [GitHub page](https://github.com/th0th/th0ths-movie-collection "th0ths-movie-collection - GitHub").
