@@ -45,6 +45,7 @@ div.th0ths_movie_collection_slider_button {
 #th0ths_movie_collection_slider li img {
     width: 137px;
     height: 202px;
+    max-width: 100%;
 }
 
 #th0ths_movie_collection_slider li p {
