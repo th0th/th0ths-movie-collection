@@ -5,23 +5,23 @@ div.th0ths_movie_collection_slider_button {
     cursor:pointer;
 }
 
-#th0ths_movie_collection_slider_left {
+#th0ths_movie_collection_slider_left, #th0ths_movie_collection_slider2_left {
     background:url(../images/widget/icons.png) -50px -265px no-repeat;
 }
 
-#th0ths_movie_collection_slider_left:hover {
+#th0ths_movie_collection_slider_left:hover, #th0ths_movie_collection_slider2_left:hover {
     background-position:-0 -265px;
 }
 
-#th0ths_movie_collection_slider_right {
+#th0ths_movie_collection_slider_right, #th0ths_movie_collection_slider2_right {
     background:url(../images/widget/icons.png) 0 90px no-repeat;
 }
 
-#th0ths_movie_collection_slider_right:hover {
+#th0ths_movie_collection_slider_right:hover, #th0ths_movie_collection_slider2_right:hover {
     background-position:-50px 90px;
 }
 
-#th0ths_movie_collection_slider {
+#th0ths_movie_collection_slider, #th0ths_movie_collection_slider2 {
     float:left;
     position:relative;
     overflow:auto;
@@ -29,32 +29,32 @@ div.th0ths_movie_collection_slider_button {
     height:250px;
 }
 
-#th0ths_movie_collection_slider ul {
+#th0ths_movie_collection_slider ul, #th0ths_movie_collection_slider2 ul {
     position:absolute;
     list-style:none;
     top:0;
     left:0;
 }
 
-#th0ths_movie_collection_slider li {
+#th0ths_movie_collection_slider li, #th0ths_movie_collection_slider2 li {
     float:left;
     width:137px;
     height:250px;
 }
 
-#th0ths_movie_collection_slider li img {
+#th0ths_movie_collection_slider li img, #th0ths_movie_collection_slider2 li img {
     width: 137px;
     height: 202px;
     max-width: 100%;
 }
 
-#th0ths_movie_collection_slider li p {
+#th0ths_movie_collection_slider li p, #th0ths_movie_collection_slider2 li p {
     width: 137px;
     font-size: 10px;
     text-align: center;
 }
 
-.th0ths_movie_collection_slider_pagination {
+.th0ths_movie_collection_slider_pagination, .th0ths_movie_collection_slider2_pagination {
     position:absolute;
     top:40px;
     right:61px;
@@ -62,7 +62,7 @@ div.th0ths_movie_collection_slider_button {
     height:25px;
 }
 
-.th0ths_movie_collection_slider_pagination li {
+.th0ths_movie_collection_slider_pagination li, .th0ths_movie_collection_slider2_pagination li {
     float:left;
     cursor:pointer;
     height:8px;
@@ -72,7 +72,11 @@ div.th0ths_movie_collection_slider_button {
     margin:0 4px 0 0;
 }
 
-.th0ths_movie_collection_slider_pagination li:hover,li.current {
+.th0ths_movie_collection_slider_pagination li:hover,li.current,  {
+    background:#fff;
+}
+
+.th0ths_movie_collection_slider2_pagination li:hover,li.current,  {
     background:#fff;
 }
 

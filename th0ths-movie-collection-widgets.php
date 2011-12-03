@@ -183,8 +183,8 @@ class th0ths_Movie_Collection_Best extends WP_Widget {
             <?php
             }
             elseif (count($movies) > 1) { ?>
-                <div class="th0ths_movie_collection_slider_button" id="th0ths_movie_collection_slider_left" onclick="slideshow.move(-1)"></div>
-                <div id="th0ths_movie_collection_slider">
+                <div class="th0ths_movie_collection_slider_button" id="th0ths_movie_collection_slider2_left" onclick="slideshow2.move(-1)"></div>
+                <div id="th0ths_movie_collection_slider2">
                     <ul>
                         <?php foreach ($movies as $movie) { ?>
                             <li>
@@ -194,8 +194,8 @@ class th0ths_Movie_Collection_Best extends WP_Widget {
                         <?php } ?>
                     </ul>
                 </div>
-                <div class="th0ths_movie_collection_slider_button" id="th0ths_movie_collection_slider_right" onclick="slideshow.move(1)"></div>
-                <ul id="th0ths_movie_collection_slider_pagination" class="th0ths_movie_collection_slider_pagination">
+                <div class="th0ths_movie_collection_slider_button" id="th0ths_movie_collection_slider2_right" onclick="slideshow2.move(1)"></div>
+                <ul id="th0ths_movie_collection_slider2_pagination" class="th0ths_movie_collection_slider_pagination">
                     <li onclick="slideshow.pos(0)"></li>
                     <li onclick="slideshow.pos(1)"></li>
                     <li onclick="slideshow.pos(2)"></li>
@@ -204,18 +204,18 @@ class th0ths_Movie_Collection_Best extends WP_Widget {
                 <div class="th0ths_movie_collection_cleanser"></div>
                 
                 <script type="text/javascript">
-                var slideshow=new TINY.slider.slide('slideshow',{
-                    id:'th0ths_movie_collection_slider',
+                var slideshow2=new TINY.slider.slide('slideshow2',{
+                    id:'th0ths_movie_collection_slider2',
                     auto:4,
                     resume:false,
                     vertical:false,
-                    navid:'th0ths_movie_collection_slider_pagination',
+                    navid:'th0ths_movie_collection_slider2_pagination',
                     activeclass:'current',
                     position:0,
                     rewind:false,
                     elastic:true,
-                    left:'th0ths_movie_collection_slider_left',
-                    right:'th0ths_movie_collection_slider_right'
+                    left:'th0ths_movie_collection_slider2_left',
+                    right:'th0ths_movie_collection_slider2_right'
                 });
                 </script>
             <?php } ?>
