@@ -3,7 +3,7 @@
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://returnfalse.net/log/
 Description: A plugin that enables you to share your movie collection with ratings on your WordPress.
-Version: 0.2
+Version: 0.3
 Author: Hüseyin Gökhan Sarı
 Author URI: https://returnfalse.net/
 License: GPL3
@@ -27,7 +27,7 @@ License: GPL3
 
 global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
 
-$th0ths_movie_collection_plugin_version = "0.2";
+$th0ths_movie_collection_plugin_version = "0.3";
 $th0ths_movie_collection_post_type = "movies";
 
 /* activation function */
@@ -46,7 +46,7 @@ function th0ths_movie_collection_activate()
 		'fetch' => 'no'
 	);
 	
-	if (get_option('th0ths-movie-collection-settings') == '')
+	if (get_option('th0ths-movie-collection-settings') == '' || get_option('th0ths_movie_collection_version') < 0.3)
 	{
 		update_option('th0ths-movie-collection-settings', $default_plugin_settings);
 	}
@@ -221,9 +221,18 @@ function th0ths_movie_collection_content_filter($context)
         if (!is_single($post))
         {
             ?>
-            <a href="<?php the_permalink(); ?>"><?php _e("Read review..."); ?></a>
-            <?php
-        }
+            <hr class="th0ths_movie_collection_seperate" />
+            <?php if (strlen(get_post($post->ID)->post_content) > 470)
+            {
+                echo substr(get_post($post->ID)->post_content, 0, 470);
+                echo "... "; ?>
+                <a href="<?php the_permalink(); ?>"><?php _e("Continue reading..."); ?></a>
+            <?php }
+            else
+            {
+                echo get_post($post->ID)->post_content;
+            } ?>
+        <?php }
         else
         {
             if (strlen($context) != 0)
