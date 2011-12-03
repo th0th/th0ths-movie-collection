@@ -6,7 +6,7 @@ div.th0ths_movie_collection_slider_button {
 }
 
 #th0ths_movie_collection_slider_left {
-    background:url(../images/widget/icons.gif) -50px -265px no-repeat;
+    background:url(../images/widget/icons.png) -50px -265px no-repeat;
 }
 
 #th0ths_movie_collection_slider_left:hover {
@@ -14,7 +14,7 @@ div.th0ths_movie_collection_slider_button {
 }
 
 #th0ths_movie_collection_slider_right {
-    background:url(../images/widget/icons.gif) 0 90px no-repeat;
+    background:url(../images/widget/icons.png) 0 90px no-repeat;
 }
 
 #th0ths_movie_collection_slider_right:hover {
