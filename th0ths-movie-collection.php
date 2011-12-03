@@ -42,7 +42,7 @@ function th0ths_movie_collection_activate()
     flush_rewrite_rules(true);
     
     $default_plugin_settings = array(
-		'labels' => array('title', 'poster', 'year', 'rating', 'genres', 'directors', 'writers', 'stars', 'cast', 'storyline'),
+		'labels' => array('title', 'poster', 'rating', 'genres'),
 		'fetch' => 'no'
 	);
 	
