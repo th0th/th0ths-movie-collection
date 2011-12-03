@@ -24,6 +24,14 @@ Plugin fetches movie information from internet using imdb id of movie. You write
 
 **IMPORTANT:** IMDb have a notice in their ToS stating scraping data from IMDb is not allowed and this plugin does some scraping. I, as developer of this plugin, don't take any responsibility about this issue. Using this plugin means you accept this responsibility.
 
+= Usage =
+
+First, get your movie's IMDb id, this is required to fetch movie information. Use the *Movies -> Add Menu* menu in your WordPress' administration panel to add a new movie. You will see the page you see when you are adding a new post, actually adding a movie is not very different. Post's title is up to you, you can write movie's title or anything about movie, or just anything else. Post body is the part that will input your review of movie.
+
+Movie information fetching will be done using *Custom Fields*. Scroll down a bit and you will see *Custom Fields* part. Type `imdb_id` as the `Name` of the custom field and your movie's IMDb id as `value`. And you are done. When you press the `Publish` button, movie information will be fetched and you will have a new posts-page-like movies-page in `http://your_blog_url.tld/movies`.
+
+Please don't hesitate to leave your comments and point the issues you encountered on project's [GitHub page](https://github.com/th0th/th0ths-movie-collection "th0ths-movie-collection - GitHub").
+
 == Installation ==
 
 1. Upload th0ths-movie-collection folder to your `wp-content/plugins/` directory.
@@ -41,11 +49,3 @@ Plugin fetches movie information from internet using imdb id of movie. You write
 
 = 0.1 =
 * First release.
-
-== Usage ==
-
-First, get your movie's IMDb id, this is required to fetch movie information. Use the *Movies -> Add Menu* menu in your WordPress' administration panel to add a new movie. You will see the page you see when you are adding a new post, actually adding a movie is not very different. Post's title is up to you, you can write movie's title or anything about movie, or just anything else. Post body is the part that will input your review of movie.
-
-Movie information fetching will be done using *Custom Fields*. Scroll down a bit and you will see *Custom Fields* part. Type `imdb_id` as the `Name` of the custom field and your movie's IMDb id as `value`. And you are done. When you press the `Publish` button, movie information will be fetched and you will have a new posts-page-like movies-page in `http://your_blog_url.tld/movies`.
-
-Please don't hesitate to leave your comments and point the issues you encountered on project's [GitHub page](https://github.com/th0th/th0ths-movie-collection "th0ths-movie-collection - GitHub").
