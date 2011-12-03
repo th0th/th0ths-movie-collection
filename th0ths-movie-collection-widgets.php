@@ -48,43 +48,38 @@ class th0ths_Movie_Collection_Most_Recent extends WP_Widget {
             <?php
             }
             elseif (count($movies) > 1) { ?>
-                <div id="th0ths_movie_collection_slider_wrapper">
-                    <div id="th0ths_movie_collection_slider_container">
-                        <div class="sliderbutton" id="slideleft" onclick="slideshow.move(-1)"></div>
-                        <div id="th0ths_movie_collection_slider">
-                            <ul>
-                                <?php foreach ($movies as $movie) { ?>
-                                    <li>
-                                        <a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a>
-                                        <p><a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a></p>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-                        </div>
-                        
-                        <div class="sliderbutton" id="slideright" onclick="slideshow.move(1)"></div>
-                        <ul id="pagination" class="pagination">
-                            <?php for ($i = 0; $i < count($movies); $i++)
-                            { ?>
-                            <li onclick="slideshow.pos(<?php echo $i; ?>)"></li>
-                            <?php } ?>
-                        </ul>
-                    </div><?php /* th0ths_movie_collection_slider_container ends */ ?>
-                </div><?php /* th0ths_movie_collection_slider_wrapper ends */ ?>
+                <div class="th0ths_movie_collection_slider_button" id="th0ths_movie_collection_slider_left" onclick="slideshow.move(-1)"></div>
+                <div id="th0ths_movie_collection_slider">
+                    <ul>
+                        <?php foreach ($movies as $movie) { ?>
+                            <li>
+                                <a href="<?php echo get_permalink($movie->id); ?>"><?php echo $movie->poster_html; ?></a>
+                                <p><a href="<?php echo get_permalink($movie->id); ?>"><strong><?php echo $movie->title; ?></strong></a></p>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+                <div class="th0ths_movie_collection_slider_button" id="th0ths_movie_collection_slider_right" onclick="slideshow.move(1)"></div>
+                <ul id="th0ths_movie_collection_slider_pagination" class="th0ths_movie_collection_slider_pagination">
+                    <li onclick="slideshow.pos(0)"></li>
+                    <li onclick="slideshow.pos(1)"></li>
+                    <li onclick="slideshow.pos(2)"></li>
+                    <li onclick="slideshow.pos(3)"></li>
+                </ul>
                 
                 <script type="text/javascript">
                 var slideshow=new TINY.slider.slide('slideshow',{
                     id:'th0ths_movie_collection_slider',
                     auto:4,
                     resume:false,
-                    vertical:true,
-                    navid:'pagination',
+                    vertical:false,
+                    navid:'th0ths_movie_collection_slider_pagination',
                     activeclass:'current',
                     position:0,
                     rewind:false,
                     elastic:true,
-                    left:'slideleft',
-                    right:'slideright'
+                    left:'th0ths_movie_collection_slider_left',
+                    right:'th0ths_movie_collection_slider_right'
                 });
                 </script>
             <?php } ?>
