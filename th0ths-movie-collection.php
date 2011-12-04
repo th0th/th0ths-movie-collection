@@ -110,48 +110,51 @@ function th0ths_movie_collection_fetch_data()
 {
     global $post;
     
-    if (!empty($post))
+    if ($post->post_type == 'movies')
     {
-        $movie['imdb_id'] = get_post_meta($post->ID, 'imdb_id', true);
-        
-        if (get_post_meta($post->ID, 'imdb_fetched', true) != 'yes' && $movie['imdb_id'] != '')
-        {    
-            $imdb_labels = array(
-                'title' => 'title',
-                'year' => 'year',
-                'rating' => 'rating',
-                'genres' => 'genres',
-                'directors' => 'directors',
-                'writers' => 'writers',
-                'stars' => 'stars',
-                'cast' => 'cast',
-                'storyline' => 'storyline'
-            );
+        if (!empty($post))
+        {
+            $movie['imdb_id'] = get_post_meta($post->ID, 'imdb_id', true);
             
-            include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
-            
-            $imdb = new Imdb();
-            $imdb_fetch = $imdb->getMovieInfoById($movie['imdb_id']);
-            
-            if (empty($imdb_fetch['poster']))
-            {
-                $imdb_fetch['poster'] = WP_PLUGIN_URL . '/th0ths-movie-collection/images/no_poster.png';
-                $poster_html = "<img src=\"" . $imdb_fetch['poster'] . "\" alt=\"Movie Poster\" / >";
-            }
-            else
-            {
-                $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
-            }
-            
-            foreach (array_keys($imdb_labels) as $movie_meta)
-            {
-                update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
-            }
-            
-            $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+            if (get_post_meta($post->ID, 'imdb_fetched', true) != 'yes' && $movie['imdb_id'] != '')
+            {    
+                $imdb_labels = array(
+                    'title' => 'title',
+                    'year' => 'year',
+                    'rating' => 'rating',
+                    'genres' => 'genres',
+                    'directors' => 'directors',
+                    'writers' => 'writers',
+                    'stars' => 'stars',
+                    'cast' => 'cast',
+                    'storyline' => 'storyline'
+                );
                 
-            update_post_meta($post->ID, 'poster_html', $poster_html);
-            update_post_meta($post->ID, 'imdb_fetched', 'yes');
+                include dirname(realpath(__FILE__)) . '/imdb_fetcher.php';
+                
+                $imdb = new Imdb();
+                $imdb_fetch = $imdb->getMovieInfoById($movie['imdb_id']);
+                
+                if (empty($imdb_fetch['poster']))
+                {
+                    $imdb_fetch['poster'] = WP_PLUGIN_URL . '/th0ths-movie-collection/images/no_poster.png';
+                    $poster_html = "<img src=\"" . $imdb_fetch['poster'] . "\" alt=\"Movie Poster\" / >";
+                }
+                else
+                {
+                    $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+                }
+                
+                foreach (array_keys($imdb_labels) as $movie_meta)
+                {
+                    update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
+                }
+                
+                $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
+                    
+                update_post_meta($post->ID, 'poster_html', $poster_html);
+                update_post_meta($post->ID, 'imdb_fetched', 'yes');
+            }
         }
     }
 }
@@ -267,6 +270,15 @@ function th0ths_movie_collection_sc_newest($atts)
     );
     
     $movies_posts = get_posts($args);
+    
+    if (empty($movies_posts))
+    {
+        ob_start(); ?>
+        <p><?php _e("There is no movie to display.");?></p>
+        <?php
+        return ob_get_clean();
+    }
+    
     $movies = array();
     
     foreach ($movies_posts as $movies_post)
