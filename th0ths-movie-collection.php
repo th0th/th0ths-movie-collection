@@ -433,6 +433,8 @@ function th0ths_movie_collection_options_option($name, $value, $text, $array=fal
 function th0ths_movie_collection_admin_menus()
 {
     add_submenu_page('edit.php?post_type=movies', __("Options"), __("Options"), 'manage_options', 'th0ths_movie_collection_options', 'th0ths_movie_collection_options');
+    
+    add_submenu_page('edit.php?post_type=movies', __("Donate"), __("Donate"), 'manage_options', 'th0ths_movie_collection_donate', 'th0ths_movie_collection_donate');
 }
 
 /* add plugin's css to wordpress' header */
