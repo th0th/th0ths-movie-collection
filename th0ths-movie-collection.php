@@ -345,6 +345,27 @@ function th0ths_movie_collection_sc_best($atts)
     wp_reset_query();
 }
 
+/* donation page */
+function th0ths_movie_collection_donate()
+{
+    ?>
+    <div class="wrap">
+        <h2><?php _e("Donate"); ?></h2>
+        <p><?php printf(__('%sth0th\'s Movie Collection%s is a free <i>(both free as in beer and freedom)</i> plugin released under terms of %sGPL%s. However, if you liked this project you can support its development by a donation.'), '<b>', '</b>', '<a target="_blank" href="http://www.gnu.org/licenses/gpl-3.0-standalone.html">', '</a>'); ?></p>
+        
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick" />
+            <input type="hidden" name="hosted_button_id" value="9D9EFHMXPRUW6" />
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG_global.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online." />
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+
+        
+        <p><?php _e("You can use Paypal button to donate.", 'th0ths-quotes'); ?></p>
+    </div>
+    <?php
+}
+
 /* plugin options page */
 function th0ths_movie_collection_options()
 {
