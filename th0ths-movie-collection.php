@@ -43,7 +43,8 @@ function th0ths_movie_collection_activate()
     
     $default_plugin_settings = array(
 		'labels' => array('title', 'poster', 'rating', 'genres'),
-		'fetch' => 'no'
+                'fetch' => 'no',
+                'movies2posts' => 'no'
 	);
 	
 	if (get_option('th0ths-movie-collection-settings') == '' || get_option('th0ths_movie_collection_version') < 0.3)
@@ -373,7 +374,8 @@ function th0ths_movie_collection_options()
     {
 		$plugin_options = array(
 			'labels' => @$_POST['labels'],
-			'fetch' => $_POST['fetch']
+                        'fetch' => $_POST['fetch'],
+                        'movies2posts' => $_POST['movies2posts']
 		);
 		
         update_option('th0ths-movie-collection-settings', $plugin_options);
@@ -411,6 +413,16 @@ function th0ths_movie_collection_options()
                     <?php th0ths_movie_collection_options_option('fetch', 'no', __("No")); ?>
                     </select>
                     <span class="description"><?php _e("Fetch movie info from IMDB each time post is edited."); ?></span>
+                </td>
+            </tr>
+            <tr>
+                <th><label><?php _e("Include movies in normal posts"); ?></label></th>
+                <td>
+                    <select name="movies2posts" id="movies2posts">
+                        <?php th0ths_movie_collection_options_option('movies2posts', 'no', __("No")); ?>
+                        <?php th0ths_movie_collection_options_option('movies2posts', 'yes', __("Yes")); ?>
+                    </select>
+                    <span class="description"><?php _e("You can display your movies on index and other normal post showing pages by setting this option."); ?></span>
                 </td>
             </tr>
         </tbody>
@@ -511,6 +523,27 @@ function th0ths_movie_collection_rating2stars($rating)
     <?php
 }
 
+function th0ths_movie_collection_movies2posts($query)
+{
+    $default_post_types = $query->get('post_type');
+
+    if ( is_array($default_post_types) )
+    {
+        $post_types = array_merge ($default_post_types, array('movies'));
+    }
+    elseif ( empty($default_post_types) )
+    {
+        $post_types = array('post', 'movies');
+    }
+
+    if ( false == $query->query_vars['suppress_filters'] )
+    {
+        $query->set( 'post_type', $post_types );
+    }
+
+    return $query;
+}
+
 /* register plugin status functions */
 register_activation_hook(__FILE__, 'th0ths_movie_collection_activate');
 
@@ -532,6 +565,15 @@ add_action('admin_head', 'th0ths_movie_collection_admin_head');
 /* register shortcodes */
 add_shortcode('th0ths-movie-collection-newest-movies', 'th0ths_movie_collection_sc_newest');
 add_shortcode('th0ths-movie-collection-best-movies', 'th0ths_movie_collection_sc_best');
+
+/* display movies as posts if it is selected */
+$plugin_options = get_option('th0ths-movie-collection-settings');
+
+if ( $plugin_options['movies2posts'] == 'yes' )
+{
+    add_filter('pre_get_posts', 'th0ths_movie_collection_movies2posts');
+}
+
 
 include "th0ths-movie-collection-widgets.php";
 
