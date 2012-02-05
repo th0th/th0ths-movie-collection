@@ -8,9 +8,9 @@
 
 **Requires at least:** 3.2.1
 
-**Tested up to:** 3.2.1
+**Tested up to:** 3.3.1
 
-**Stable tag:** 0.4
+**Stable tag:** 0.5
 
 A plugin that enables you to share your movie collection with ratings on your WordPress.
 
@@ -52,6 +52,9 @@ Please don't hesitate to leave your comments and point the issues you encountere
 5. Plugin's options page
 
 == Changelog ==
+
+=== 0.5 ===
+* Now movies can be displayed with normal posts.
 
 === 0.4 ===
 * Movie information fetch function bug fix (now it's applied only for movies).
