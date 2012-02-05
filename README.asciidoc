@@ -32,7 +32,7 @@ Plugin fetches movie information from internet using imdb id of movie. You write
 
 === Usage ===
 
-First, get your movie's IMDb id, this is required to fetch movie information. Use the *Movies -> Add Menu* menu in your WordPress' administration panel to add a new movie. You will see the page you see when you are adding a new post, actually adding a movie is not very different. Post's title is up to you, you can write movie's title or anything about movie, or just anything else. Post body is the part that will input your review of movie.
+First, get your movie's IMDb id, this is required to fetch movie information. Use the *Movies -> Add Movie* menu in your WordPress' administration panel to add a new movie. You will see the page you see when you are adding a new post, actually adding a movie is not very different. Post's title is up to you, you can write movie's title or anything about movie, or just anything else. Post body is the part that will input your review of movie.
 
 Movie information fetching will be done using *Custom Fields*. Scroll down a bit and you will see *Custom Fields* part. Type `imdb_id` as the `Name` of the custom field and your movie's IMDb id as `value`. And you are done. When you press the `Publish` button, movie information will be fetched and you will have a new posts-page-like movies-page in `http://your_blog_url.tld/movies`.
 
