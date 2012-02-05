@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: th0th's Movie Collection
-Plugin URI: https://returnfalse.net/log/
+Plugin URI: https://github.com/th0th/th0ths-movie-collection
 Description: A plugin that enables you to share your movie collection with ratings on your WordPress.
-Version: 0.4
+Version: 0.5
 Author: Hüseyin Gökhan Sarı
-Author URI: https://returnfalse.net/
+Author URI: http://returnfalse.net/
 License: GPL3
 */
 
@@ -27,7 +27,7 @@ License: GPL3
 
 global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
 
-$th0ths_movie_collection_plugin_version = "0.4";
+$th0ths_movie_collection_plugin_version = "0.5";
 $th0ths_movie_collection_post_type = "movies";
 
 /* activation function */
