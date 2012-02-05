@@ -56,7 +56,26 @@ function th0ths_movie_collection_activate()
 /* upgrade function */
 function th0ths_movie_collection_upgrade()
 {
-    
+    global $th0ths_movie_collection_plugin_version;
+
+    $plugin_version = get_option('th0ths_movie_collection_version');
+
+    if ( $plugin_version < 0.5 )
+    {
+        /* Settings will be reset. */
+        $default_plugin_settings = array(
+            'labels' => array('title', 'poster', 'rating', 'genres'),
+            'fetch' => 'no',
+            'movies2posts' => 'no'
+        );
+
+        update_option('th0ths-movie-collection-settings', $default_plugin_settings);
+    }
+
+    if ( $plugin_version != $th0ths_movie_collection_plugin_version )
+    {
+        update_option('th0ths_movie_collection_version', $th0ths_movie_collection_plugin_version);
+    }
 }
 
 /* deactivation function */
@@ -546,6 +565,7 @@ function th0ths_movie_collection_movies2posts($query)
 
 /* register plugin status functions */
 register_activation_hook(__FILE__, 'th0ths_movie_collection_activate');
+add_action('plugins_loaded', 'th0ths_movie_collection_upgrade');
 
 /* register plugin post-type */
 add_action('init', 'th0ths_movie_collection_post_type');
