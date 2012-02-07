@@ -555,7 +555,7 @@ function th0ths_movie_collection_movies2posts($query)
         $post_types = array('post', 'movies');
     }
 
-    if ( false == $query->query_vars['suppress_filters'] )
+    if ( is_home() && false == $query->query_vars['suppress_filters'] )
     {
         $query->set( 'post_type', $post_types );
     }
