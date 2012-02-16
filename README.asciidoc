@@ -54,7 +54,7 @@ Please don't hesitate to leave your comments and point the issues you encountere
 == Changelog ==
 
 === 0.7 ===
-* Make trimming move reviews function configurable.
+* Make trimming movie reviews function configurable.
 
 === 0.6 ===
 * A bug fixing version.
