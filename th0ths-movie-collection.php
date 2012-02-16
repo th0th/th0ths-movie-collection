@@ -3,7 +3,7 @@
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://github.com/th0th/th0ths-movie-collection
 Description: A plugin that enables you to share your movie collection with ratings on your WordPress.
-Version: 0.6
+Version: 0.7
 Author: Hüseyin Gökhan Sarı
 Author URI: http://returnfalse.net/
 License: GPL3
@@ -27,7 +27,7 @@ License: GPL3
 
 global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
 
-$th0ths_movie_collection_plugin_version = "0.6";
+$th0ths_movie_collection_plugin_version = "0.7";
 $th0ths_movie_collection_post_type = "movies";
 
 /* activation function */
@@ -60,11 +60,13 @@ function th0ths_movie_collection_upgrade()
 
     $plugin_version = get_option('th0ths_movie_collection_version');
 
-    if ( $plugin_version < 0.5 )
+    if ( $plugin_version < 0.7 )
     {
         /* Settings will be reset. */
         $default_plugin_settings = array(
             'labels' => array('title', 'poster', 'rating', 'genres'),
+            'trim' => 'yes',
+            'trim_length' => 470,
             'fetch' => 'no',
             'movies2posts' => 'no'
         );
@@ -117,10 +119,12 @@ function th0ths_movie_collection_post_type()
         'capability_type' => 'post',
         'hierarchical' => false,
         'supports' => array('title', 'editor', 'custom-fields', 'comments'),
+        'taxonomies' => array('post_tag', 'category'),
         'has_archive' => true,
         'rewrite' => true,
         'can_export' => true
     );
+
     
     register_post_type($th0ths_movie_collection_post_type, $post_type_args);
 }
@@ -245,12 +249,15 @@ function th0ths_movie_collection_content_filter($context)
         {
             ?>
             <hr class="th0ths_movie_collection_seperate" />
-            <?php if (strlen(get_post($post->ID)->post_content) > 470)
+            <?php if ($options['trim'] == 'yes')
+        {
+            if (strlen(get_post($post->ID)->post_content) > $options['trim_length'])
             {
-                echo substr(get_post($post->ID)->post_content, 0, 470);
-                echo "... "; ?>
-                <a href="<?php the_permalink(); ?>"><?php _e("Continue reading..."); ?></a>
-            <?php }
+                echo substr(get_post($post->ID)->post_content, 0, $options['trim_length']);
+                echo "...";
+                ?><br /><a href="<?php the_permalink(); ?>"><?php _e("Continue reading..."); ?></a><?php
+            }
+        }
             else
             {
                 echo get_post($post->ID)->post_content;
@@ -391,13 +398,24 @@ function th0ths_movie_collection_options()
 {
     if (!empty($_POST))
     {
-		$plugin_options = array(
-			'labels' => @$_POST['labels'],
-                        'fetch' => $_POST['fetch'],
-                        'movies2posts' => $_POST['movies2posts']
-		);
-		
-        update_option('th0ths-movie-collection-settings', $plugin_options);
+        if ( preg_match('/^[0-9]{1,}$/', $_POST['trim_length']))
+        {
+            $plugin_options = array(
+                'labels' => @$_POST['labels'],
+                'fetch' => $_POST['fetch'],
+                'trim' => $_POST['trim'],
+                'trim_length' => (int)$_POST['trim_length'],
+                'movies2posts' => $_POST['movies2posts']
+            );
+                    
+            update_option('th0ths-movie-collection-settings', $plugin_options);
+        }
+        else
+        {
+        ?>
+            <div class="th0ths_movie_collection_error"><?php _e("Error: Length should be a numeric value."); ?></div>
+        <?php
+        }
     }
     ?>
     <div class="wrap" id="th0ths_movie_collection_options">
@@ -422,6 +440,23 @@ function th0ths_movie_collection_options()
                     <?php th0ths_movie_collection_options_option('labels', 'storyline', __("Storyline"), true); ?>
                     </select>
                     <span class="description"><?php _e("You can select more than one by holding CTRL button while selecting."); ?>
+                </td>
+            </tr>
+            <tr>
+                <th><label><?php _e("Shorten reviews"); ?></label></th>
+                <td>
+                    <select name="trim" id="trim">
+                    <?php th0ths_movie_collection_options_option('trim', 'yes', __("Yes")); ?>
+                    <?php th0ths_movie_collection_options_option('trim', 'no', __("No")); ?>
+                    </select>
+                    <span class="description"><?php _e("Shorten review while displaying movies."); ?></span>
+                </td>
+            </tr>
+            <tr>
+                <th><label><?php _e("Length"); ?></label></th>
+                <td>
+                    <?php th0ths_movie_collection_options_input('trim_length', 'trim_length'); ?>
+                    <span class="description"><?php _e("Length of shortened review text. Will be used only if shortening is enabled."); ?></span>
                 </td>
             </tr>
             <tr>
@@ -479,6 +514,16 @@ function th0ths_movie_collection_options_option($name, $value, $text, $array=fal
         }
         ?>><?php echo $text; ?></option><?php
     }
+}
+
+function th0ths_movie_collection_options_input($name, $id = '')
+{
+    $settings = get_option('th0ths-movie-collection-settings');
+    $setting = $settings[$name];
+
+?>
+    <input type="text" name="<?php echo $name; ?>" <?php if ( $id != '' ) { ?>id="<?php echo $id; ?>"<?php } ?> value="<?php echo $setting; ?>" />
+<?php
 }
 
 /* add admin menus */
