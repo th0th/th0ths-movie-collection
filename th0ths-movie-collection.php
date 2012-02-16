@@ -117,10 +117,12 @@ function th0ths_movie_collection_post_type()
         'capability_type' => 'post',
         'hierarchical' => false,
         'supports' => array('title', 'editor', 'custom-fields', 'comments'),
+        'taxonomies' => array('post_tag', 'category'),
         'has_archive' => true,
         'rewrite' => true,
         'can_export' => true
     );
+
     
     register_post_type($th0ths_movie_collection_post_type, $post_type_args);
 }
