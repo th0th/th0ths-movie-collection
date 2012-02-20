@@ -42,15 +42,17 @@ function th0ths_movie_collection_activate()
     flush_rewrite_rules(true);
     
     $default_plugin_settings = array(
-		'labels' => array('title', 'poster', 'rating', 'genres'),
-                'fetch' => 'no',
-                'movies2posts' => 'no'
-	);
-	
-	if (get_option('th0ths-movie-collection-settings') == '' || get_option('th0ths_movie_collection_version') < 0.3)
-	{
-		update_option('th0ths-movie-collection-settings', $default_plugin_settings);
-	}
+            'labels' => array('title', 'poster', 'rating', 'genres'),
+            'trim' => 'yes',
+            'trim_length' => 470,
+            'fetch' => 'no',
+            'movies2posts' => 'no'
+    );
+    
+    if (get_option('th0ths-movie-collection-settings') == '' || get_option('th0ths_movie_collection_version') < 0.3)
+    {
+        update_option('th0ths-movie-collection-settings', $default_plugin_settings);
+    }
 }
 
 /* upgrade function */
