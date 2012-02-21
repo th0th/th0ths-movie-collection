@@ -602,7 +602,7 @@ function th0ths_movie_collection_movies2posts($query)
         $post_types = array('post', 'movies');
     }
 
-    if ( is_home() )
+    if ( is_home() || is_category() || is_archive() )
     {
         $query->set( 'post_type', $post_types );
     }
