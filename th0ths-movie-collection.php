@@ -3,7 +3,7 @@
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://github.com/th0th/th0ths-movie-collection
 Description: A plugin that enables you to share your movie collection with ratings on your WordPress.
-Version: 0.7
+Version: 0.75
 Author: Hüseyin Gökhan Sarı
 Author URI: http://returnfalse.net/
 License: GPL3
@@ -27,7 +27,7 @@ License: GPL3
 
 global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
 
-$th0ths_movie_collection_plugin_version = "0.7";
+$th0ths_movie_collection_plugin_version = "0.75";
 $th0ths_movie_collection_post_type = "movies";
 
 /* activation function */
@@ -42,15 +42,17 @@ function th0ths_movie_collection_activate()
     flush_rewrite_rules(true);
     
     $default_plugin_settings = array(
-		'labels' => array('title', 'poster', 'rating', 'genres'),
-                'fetch' => 'no',
-                'movies2posts' => 'no'
-	);
-	
-	if (get_option('th0ths-movie-collection-settings') == '' || get_option('th0ths_movie_collection_version') < 0.3)
-	{
-		update_option('th0ths-movie-collection-settings', $default_plugin_settings);
-	}
+            'labels' => array('title', 'poster', 'rating', 'genres'),
+            'trim' => 'yes',
+            'trim_length' => 470,
+            'fetch' => 'no',
+            'movies2posts' => 'no'
+    );
+    
+    if (get_option('th0ths-movie-collection-settings') == '' || get_option('th0ths_movie_collection_version') < 0.3)
+    {
+        update_option('th0ths-movie-collection-settings', $default_plugin_settings);
+    }
 }
 
 /* upgrade function */
@@ -600,7 +602,7 @@ function th0ths_movie_collection_movies2posts($query)
         $post_types = array('post', 'movies');
     }
 
-    if ( is_home() && false == $query->query_vars['suppress_filters'] )
+    if ( is_home() || is_category() || is_archive() )
     {
         $query->set( 'post_type', $post_types );
     }
