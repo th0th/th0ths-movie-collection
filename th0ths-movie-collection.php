@@ -591,22 +591,30 @@ function th0ths_movie_collection_rating2stars($rating)
 
 function th0ths_movie_collection_movies2posts($query)
 {
-    $default_post_types = $query->get('post_type');
-
-    if ( is_array($default_post_types) )
+    if ( (is_category() || is_home()) && false == @$query->query_vars['suppress_filters'] )
     {
-        $post_types = array_merge ($default_post_types, array('movies'));
+        if ( !isset($query->query_vars['post_type']) )
+        {
+            $query->set('post_type', array('post', 'movies'));
+        }
+        else
+        {
+            $post_types = $query->query_vars['post_type'];
+            
+            if ( is_array($post_types) && !in_array('movies', $post_types) ) {
+                $post_types = array_merge($post_types, array('movies'));
+            }
+            elseif ( is_string($post_types) && $post_types != 'movies' )
+            {
+                $post_types = array($post_types, 'movies');
+            }
+            else
+            {
+                $post_types = array('post', 'movies');
+            }
+        }
     }
-    elseif ( empty($default_post_types) )
-    {
-        $post_types = array('post', 'movies');
-    }
-
-    if ( is_home() || is_category() || is_archive() )
-    {
-        $query->set( 'post_type', $post_types );
-    }
-
+    
     return $query;
 }
 
