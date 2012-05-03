@@ -120,7 +120,7 @@ function th0ths_movie_collection_post_type()
         'menu_icon' => WP_PLUGIN_URL . '/th0ths-movie-collection/images/admin/menu-icon.png',
         'capability_type' => 'post',
         'hierarchical' => false,
-        'supports' => array('title', 'editor', 'custom-fields', 'comments'),
+        'supports' => array('title', 'editor', 'custom-fields', 'comments', 'excerpt'),
         'taxonomies' => array('post_tag', 'category'),
         'has_archive' => true,
         'rewrite' => true,
