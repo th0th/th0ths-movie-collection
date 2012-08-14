@@ -3,7 +3,7 @@
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://github.com/th0th/th0ths-movie-collection
 Description: A plugin that enables you to share your movie collection with ratings on your WordPress.
-Version: 0.8
+Version: 0.9
 Author: Hüseyin Gökhan Sarı
 Author URI: http://returnfalse.net/
 License: GPL3
@@ -27,7 +27,7 @@ License: GPL3
 
 global $wpdb, $th0ths_movie_collection_plugin_version, $th0ths_movie_collection_post_type;
 
-$th0ths_movie_collection_plugin_version = "0.8";
+$th0ths_movie_collection_plugin_version = "0.9";
 $th0ths_movie_collection_post_type = "movies";
 
 /* activation function */
@@ -143,7 +143,7 @@ function th0ths_movie_collection_fetch_data()
             $movie['imdb_id'] = get_post_meta($post->ID, 'imdb_id', true);
             
             if (get_post_meta($post->ID, 'imdb_fetched', true) != 'yes' && $movie['imdb_id'] != '')
-            {    
+            {
                 $imdb_labels = array(
                     'title' => 'title',
                     'year' => 'year',
@@ -161,7 +161,7 @@ function th0ths_movie_collection_fetch_data()
                 $imdb = new Imdb();
                 $imdb_fetch = $imdb->getMovieInfoById($movie['imdb_id']);
                 
-                if (empty($imdb_fetch['poster']))
+                if (substr($imdb_fetch['poster'], -18) == 'facebook_share.png')
                 {
                     $imdb_fetch['poster'] = WP_PLUGIN_URL . '/th0ths-movie-collection/images/no_poster.png';
                     $poster_html = "<img src=\"" . $imdb_fetch['poster'] . "\" alt=\"Movie Poster\" / >";
@@ -176,8 +176,8 @@ function th0ths_movie_collection_fetch_data()
                     update_post_meta($post->ID, $movie_meta, $imdb_fetch[$imdb_labels[$movie_meta]]);
                 }
                 
-                $poster_html = media_sideload_image($imdb_fetch['poster'], $post->ID, __("Movie Poster"));
-                    
+                error_log($poster_html);
+                
                 update_post_meta($post->ID, 'poster_html', $poster_html);
                 update_post_meta($post->ID, 'imdb_fetched', 'yes');
             }
@@ -366,6 +366,34 @@ function th0ths_movie_collection_sc_best($atts)
             <a href="<?php the_permalink(); ?>"><?php echo $movie_poster; ?></a>
             <h3><?php _e("Storyline"); ?></h3>
             <div><?php echo $movie_storyline; ?></div>
+        </div>
+        <?php
+    endwhile;
+    ?></div><?php
+
+    wp_reset_query();
+}
+
+function th0ths_movie_collection_sc_posters($atts)
+{
+    extract(shortcode_atts(array(
+        'year' => ''
+    ), $atts));
+    
+	$args = array(
+        'post_type' => 'movies',
+        'orderby' => 'date',
+        'order' => 'DESC'
+    );
+    
+    query_posts($args);
+    ?><div id="th0ths_movie_collection_sc_posters"><?php
+    while (have_posts()) : the_post();
+        $movie_poster = get_post_meta(get_the_ID(), 'poster_html', TRUE);
+        $movie_storyline = get_post_meta(get_the_ID(), 'storyline', TRUE);
+        ?>
+        <div id="th0ths_movie_collection_sc_poster">
+            <a title="<?php the_title(); ?>" href="<?php the_permalink(); ?>"><?php echo $movie_poster; ?></a>
         </div>
         <?php
     endwhile;
@@ -640,6 +668,7 @@ add_action('admin_head', 'th0ths_movie_collection_admin_head');
 /* register shortcodes */
 add_shortcode('th0ths-movie-collection-newest-movies', 'th0ths_movie_collection_sc_newest');
 add_shortcode('th0ths-movie-collection-best-movies', 'th0ths_movie_collection_sc_best');
+add_shortcode('th0ths-movie-collection-posters', 'th0ths_movie_collection_sc_posters');
 
 /* display movies as posts if it is selected */
 $plugin_options = get_option('th0ths-movie-collection-settings');

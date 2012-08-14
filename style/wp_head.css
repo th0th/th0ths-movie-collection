@@ -53,3 +53,12 @@ div.th0ths_movie_collection_sc_single_poster {
     float: left;
     margin-right: 12px;
 }
+
+div#th0ths_movie_collection_sc_poster {
+	float: left;
+	margin-left: 10px;
+}
+
+div#th0ths_movie_collection_sc_poster img {
+	width: 120px;
+}
