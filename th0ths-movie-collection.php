@@ -120,7 +120,7 @@ class th0thsMovieCollection {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'has_archive' => true,
-			'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'), // comments feature depends on plugin options
+			'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'), // comments feature depends on plugin options
 			'menu_icon' => $this->plugin_url . '/resources/images/movie-icon.png',
 			'menu_position' => 5
 		);
