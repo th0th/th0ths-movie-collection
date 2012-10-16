@@ -11,18 +11,18 @@ License: GPL2
 
 /*  Copyright 2012  H.Gökhan Sarı  (email : me@th0th.me)
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as 
-    published by the Free Software Foundation.
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License, version 2, as 
+	published by the Free Software Foundation.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 class th0thsMovieCollection {
@@ -67,6 +67,9 @@ class th0thsMovieCollection {
 
 		# the_content filter
 		add_filter('the_content', array($this, 'content_filter'));
+
+		# register widgets
+		add_action('widgets_init', array($this, 'register_widgets'));
 
 		# HOOKS AND FILTERS END
 	}
@@ -117,7 +120,7 @@ class th0thsMovieCollection {
 			'show_ui' => true,
 			'show_in_menu' => true,
 			'has_archive' => true,
-			'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'), // comments feature depends on plugin options
+			'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'custom-fields'), // comments feature depends on plugin options
 			'menu_icon' => $this->plugin_url . '/resources/images/movie-icon.png',
 			'menu_position' => 5
 		);
@@ -179,17 +182,17 @@ class th0thsMovieCollection {
 		jQuery(function() {
 			jQuery("input#imdb_id").change(function() {
 				jQuery.ajax({
-                    type : 'GET',
-                    url: "http://www.omdbapi.com/?i=" + jQuery("input#imdb_id").val(),
-                    dataType: 'jsonp',
-                    success: function(movie) {
-                    	if ( typeof(movie.Error) != "undefined" ) {
-                        	jQuery("div#ajax_movie_info").html('<div><p style="font-weight: bold;"><?php _e("Not found."); ?></p>');
-                    	} else {
-                    		jQuery("div#ajax_movie_info").html('<img style="height: 120px; margin-right: 10px; float: left;" src="' + movie.Poster + '" /><div><p style="font-weight: bold;">' + movie.Title + '</p><p>' + movie.Plot + '</p></div>');
-                    	}
-                    }
-                });
+					type : 'GET',
+					url: "http://www.omdbapi.com/?i=" + jQuery("input#imdb_id").val(),
+					dataType: 'jsonp',
+					success: function(movie) {
+						if ( typeof(movie.Error) != "undefined" ) {
+							jQuery("div#ajax_movie_info").html('<div><p style="font-weight: bold;"><?php _e("Not found."); ?></p>');
+						} else {
+							jQuery("div#ajax_movie_info").html('<img style="height: 120px; margin-right: 10px; float: left;" src="' + movie.Poster + '" /><div><p style="font-weight: bold;">' + movie.Title + '</p><p>' + movie.Plot + '</p></div>');
+						}
+					}
+				});
 
 			});
 		});
@@ -285,6 +288,16 @@ class th0thsMovieCollection {
 
 	public function handle_admin_header() {
 		wp_enqueue_script("jquery-ui-sortable");
+	}
+
+	public function register_widgets() {
+		# widgets
+		require $this->plugin_path . 'lib/widgets.php';
+		register_widget('th0thsMovieCollectionWidgetNewests');
+
+		# slider js and css
+		wp_enqueue_script('tmc_slider_js', $this->plugin_url . '/resources/js/slider.js');
+		wp_enqueue_style('tmc_slider_css', $this->plugin_url . '/resources/css/slider.css');
 	}
 }
 
