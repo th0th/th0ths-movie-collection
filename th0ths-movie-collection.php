@@ -71,6 +71,9 @@ class th0thsMovieCollection {
 		# register widgets
 		add_action('widgets_init', array($this, 'register_widgets'));
 
+		# slider css and js
+		add_action('widgets_init', array($this, 'slider_stuff'));
+
 		# HOOKS AND FILTERS END
 	}
 
@@ -296,8 +299,18 @@ class th0thsMovieCollection {
 		register_widget('th0thsMovieCollectionWidgetNewests');
 
 		# slider js and css
-		wp_enqueue_script('tmc_slider_js', $this->plugin_url . '/resources/js/slider.js');
-		wp_enqueue_style('tmc_slider_css', $this->plugin_url . '/resources/css/slider.css');
+	}
+
+	public function slider_stuff() {
+		# load related css and js if widget is active
+		if ( is_active_widget(false, false, 'tmc_newest', true) ) {
+			# js
+			wp_enqueue_script('jquery');
+			wp_enqueue_script('tmc_slider_js', $this->plugin_url . '/resources/js/slider.js');
+
+			# css
+			wp_enqueue_style('tmc_slider_css', $this->plugin_url . '/resources/css/slider.css');
+		}
 	}
 }
 
