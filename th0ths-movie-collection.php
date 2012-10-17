@@ -245,6 +245,16 @@ class th0thsMovieCollection {
 			if ( !is_object($html_poster) ) {
 				# means poster is fetched successfully
 				update_post_meta($post_id, 'html_poster', $html_poster);
+			} else {
+				# imdb didn't return any posters, so we need to put our own
+				ob_start();
+
+				?>
+				<img src="<?php echo $this->plugin_url; ?>/resources/images/no_poster.png" alt="poster" />
+				<?php
+
+				$html_no_poster = ob_get_clean();
+				update_post_meta($post_id, 'html_poster', $html_no_poster);
 			}
 
 			# add a marker meta data to prevent future fetches
