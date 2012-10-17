@@ -297,6 +297,7 @@ class th0thsMovieCollection {
 		# widgets
 		require $this->plugin_path . 'lib/widgets.php';
 		register_widget('th0thsMovieCollectionWidgetNewests');
+		register_widget('th0thsMovieCollectionWidgetBests');
 
 		# slider js and css
 	}
