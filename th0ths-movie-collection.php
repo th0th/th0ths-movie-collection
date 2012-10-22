@@ -3,7 +3,7 @@
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://github.com/th0th/th0ths-movie-collection
 Description: A movie collection plugin.
-Version: 0.1
+Version: 0.99
 Author: H.Gökhan Sarı
 Author URI: http://th0th.me
 License: GPL2
@@ -26,7 +26,7 @@ License: GPL2
 */
 
 class th0thsMovieCollection {
-	protected $plugin_version = "0.1";
+	protected $plugin_version = "0.99";
 	protected $plugin_url;
 	protected $plugin_path;
 	protected $views_path;
