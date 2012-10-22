@@ -313,15 +313,12 @@ class th0thsMovieCollection {
 	}
 
 	public function slider_stuff() {
-		# load related css and js if widget is active
-		if ( is_active_widget(false, false, 'tmc_newest', true) ) {
-			# js
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('tmc_slider_js', $this->plugin_url . '/resources/js/slider.js');
+		# js
+		wp_enqueue_script('jquery');
+		wp_enqueue_script('tmc_slider_js', $this->plugin_url . '/resources/js/slider.js');
 
-			# css
-			wp_enqueue_style('tmc_slider_css', $this->plugin_url . '/resources/css/slider.css');
-		}
+		# css
+		wp_enqueue_style('tmc_slider_css', $this->plugin_url . '/resources/css/slider.css');
 	}
 }
 
