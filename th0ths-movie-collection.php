@@ -285,10 +285,10 @@ class th0thsMovieCollection {
 
 			# load view
 			require $this->views_path . '/content-movie.php';
+		} else {
+			# if it's not movie type post, don't touch the content
+			return $content;
 		}
-
-		# people does this, dunno
-		return;
 	}
 
 	public function handle_style() {
