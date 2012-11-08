@@ -29,7 +29,7 @@ class Imdb
     function getMovieInfoById($imdbId)
     {
         $arr = array();
-        $imdbUrl = "http://www.imdb.com/title/" . trim($imdbId) . "/";
+        $imdbUrl = "http://akas.imdb.com/title/" . trim($imdbId) . "/";
         $html = $this->geturl($imdbUrl);
         if(stripos($html, "<meta name=\"application-name\" content=\"IMDb\" />") !== false){
             $arr = $this->scrapMovieInfo($html);
