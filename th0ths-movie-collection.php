@@ -3,16 +3,16 @@
 Plugin Name: th0th's Movie Collection
 Plugin URI: https://github.com/th0th/th0ths-movie-collection
 Description: A movie collection plugin.
-Version: 0.99
+Version: 1.0
 Author: H.Gökhan Sarı
 Author URI: http://th0th.me
-License: GPL2
+License: GPL3
 */
 
-/*  Copyright 2012  H.Gökhan Sarı  (email : me@th0th.me)
+/*  Copyright 2013  H.Gökhan Sarı  (email : me@th0th.me)
 
 	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License, version 2, as 
+	it under the terms of the GNU General Public License, version 3, as 
 	published by the Free Software Foundation.
 
 	This program is distributed in the hope that it will be useful,
