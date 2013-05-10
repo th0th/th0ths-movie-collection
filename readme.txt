@@ -47,6 +47,9 @@ Please don't hesitate to leave your comments and point the issues you encountere
 
 == Changelog ==
 
+= 1.0 =
+* Updated IMDB scraping library.
+
 = 0.9 =
 * Added shortcode for viewing posters of all movies.
 
